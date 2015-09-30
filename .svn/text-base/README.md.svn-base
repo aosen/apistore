@@ -3,8 +3,8 @@
 基于POST方法
 
 ##web api 签名验证(仅供测试)
-1.appid: 10000
-2.appsecret: c174cb1fda3491285be953998bb867a0
+1. appid: 10000
+2. appsecret: c174cb1fda3491285be953998bb867a0
 
 ###签名方法
 调用 API 时需要对请求参数进行签名验证，服务器会对该请求参数进行验证是否合法的。方法如下：
@@ -12,12 +12,20 @@
 例如：将foo=1,bar=2,baz=3 排序为bar=2,baz=3,foo=1，参数名和参数值链接后，得到拼装字符串bar2baz3foo1
 
 ###系统暂时只支持MD5加密方式：
-1.md5：将 appsecret 拼接到参数字符串头、尾进行md5加密，格式是：md5(appsecretkey1value1key2value2...appsecret)
-2.注：我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
+1. md5：将 appsecret 拼接到参数字符串头、尾进行md5加密，格式是：md5(appsecretkey1value1key2value2...appsecret)
+2. 注：我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 
 ###签名认证的测试连接：
 ####地址：http://api.doubi.so/taglist/
 ####参数：
+<table>
+<tbody>
+<tr><td><em>Year</em></td><td><em>Temperature (low)</em></td><td><em>Temperature (high)</em></td></tr>
+<tr><td>1900</td><td>-10</td><td>25</td></tr>
+<tr><td>1910</td><td>-15</td><td>30</td></tr>
+<tr><td>1920</td><td>-10</td><td>32</td></tr>
+</tbody>
+</table>
 || *参数名* || *必填* || *描述* || *默认值* ||
 || appid || yes || 应用ID || 您自己的appid ||
 ||sign_method || yes || 签名方式 || 目前支持md5 ||
