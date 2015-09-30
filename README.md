@@ -20,10 +20,10 @@
 ####参数：
 <table>
 <tbody>
-<tr><td><em>Year</em></td><td><em>Temperature (low)</em></td><td><em>Temperature (high)</em></td></tr>
-<tr><td>1900</td><td>-10</td><td>25</td></tr>
-<tr><td>1910</td><td>-15</td><td>30</td></tr>
-<tr><td>1920</td><td>-10</td><td>32</td></tr>
+<tr><td><em>参数名</em></td><td><em>必填</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
+<tr><td>appid</td><td>yes</td><td>应用ID</td><td>您自己的appid</td></tr>
+<tr><td>sign_method</td><td>yes</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign</td><td>yes</td><td>签名</td><td>加密后的签名</td></tr>
 </tbody>
 </table>
 || *参数名* || *必填* || *描述* || *默认值* ||
