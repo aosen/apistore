@@ -2,17 +2,17 @@
 基于json通信
 基于POST方法
 
-##web api 签名验证(仅供测试)
+##web api 签名验证(一下appid，appsecret仅供测试)
 1. appid: 10000
 2. appsecret: c174cb1fda3491285be953998bb867a0
 
 ###签名方法
-调用 API 时需要对请求参数进行签名验证，服务器会对该请求参数进行验证是否合法的。方法如下：
+调用 API 时需要对请求参数(除sign)进行签名验证，服务器会对该请求参数进行验证是否合法的。方法如下：
 根据参数名称（除签名和图片文件）将所有请求参数按照字母先后顺序排序:key + value .... key + value
 例如：将foo=1,bar=2,baz=3 排序为bar=2,baz=3,foo=1，参数名和参数值链接后，得到拼装字符串bar2baz3foo1
 
 ###系统暂时只支持MD5加密方式：
-1. md5：将 appsecret 拼接到参数字符串头、尾进行md5加密，格式是：md5(appsecretkey1value1key2value2...appsecret)
+1md5：将 appsecret 拼接到参数字符串头、尾进行md5加密，格式是：md5(appsecretkey1value1key2value2...appsecret)
 2. 注：我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 
 ###签名认证的测试连接：
@@ -26,13 +26,19 @@
 <tr><td>sign</td><td>yes</td><td>签名</td><td>加密后的签名</td></tr>
 </tbody>
 </table>
-|| *参数名* || *必填* || *描述* || *默认值* ||
-|| appid || yes || 应用ID || 您自己的appid ||
-||sign_method || yes || 签名方式 || 目前支持md5 ||
-|| sign || yes || 签名 || 加密后得到的签名 ||
+####测试最后生成的正确签名应该为：
+sign=6af9722387fca2dedab57713bac9bbfa
 
 #新闻WEB API
 ##参数列表：
+<table>
+<tbody>
+<tr><td><em>参数名</em></td><td><em>必填</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
+<tr><td>appid</td><td>yes</td><td>应用ID</td><td>您自己的appid</td></tr>
+<tr><td>sign_method</td><td>yes</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign_method</td><td>yes</td><td>签名方式</td><td>目前支持MD5</td></tr>
+</tbody>
+</table>
     appid, sign, sign_method, tag，limit，page
 
 ##获取新闻接口，前三条为置顶新闻
