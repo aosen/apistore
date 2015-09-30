@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+
+from base import Base
+
+
+class NovelBase(Base):
+    """novel model基础类"""
+    def __init__(self):
+        pass
+
+
+    def loadAllTag(self):
+        sql = "SELECT * FROM tag"
+        return self.db.query(sql)
+
+
+    def loadAllFirstTag(self, second):
+        sql = "SELECT * FROM tag WHERE second=%s"
+        return self.db.query(sql, second)
+
+
+    def loadAllSecondTag(self, first):
+        sql = "SELECT * FROM tag WHERE first=%s"
+        return self.db.query(sql, first)
+
+
+    def loadFirstSecondTag(self, first, second):
+        sql = "SELECT * FROM tag WHERE first=%s AND second=%s"
+        return self.db.query(sql, first, second)
+
+
+    def loadNovelList(self, first, second, page, limit):
+        sql = "SELECT * FROM novel WHERE first=%s AND second=%s LIMIT %s,%s"
+        return self.db.query(sql, first, second, (page-1)*limit, limit)
+
+
+    def loadNovelIntroduction(self, novelid):
+        sql = "SELECT * FROM novel WHERE id=%s"
+        return self.db.query(sql, novelid)
+
+
+    def loadNovelChapter(self, id):
+        sql = "SELECT * FROM content WHERE novelid=%s ORDER BY chapter"
+        return self.db.query(sql, id)
+
+
+    def loadNovelContent(self, chapterid):
+        sql = "SELECT * FROM content WHERE id=%s"
+        return self.db.query(sql, chapterid)
