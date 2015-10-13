@@ -116,5 +116,5 @@ http://api.doubi.so/novelclick/
 ####参数：
 novelid
 ####
-pv(当前novelid的对应的小说阅读量)
+novelpv(当前novelid的对应的小说阅读量)
     
