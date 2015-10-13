@@ -17,21 +17,20 @@
 ##参数列表：
 <table>
 <tbody>
-<tr><td><em>参数名</em></td><td><em>必填</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
-<tr><td>appid</td><td>yes</td><td>应用ID</td><td>您自己的appid</td></tr>
-<tr><td>sign_method</td><td>yes</td><td>签名方式</td><td>目前支持MD5</td></tr>
-<tr><td>sign_method</td><td>yes</td><td>签名方式</td><td>目前支持MD5</td></tr>
-<tr><td>tag</td><td>yes</td><td>新闻分类</td><td>分类见下表</td></tr>
-<tr><td>limit</td><td>yes</td><td>新闻分类</td><td>分类见下表</td></tr>
-<tr><td>tag</td><td>yes</td><td>新闻分类</td><td>分类见下表</td></tr>
+<tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
+<tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
+<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>tag</td><td>新闻分类</td><td>分类见下表</td></tr>
+<tr><td>limit</td><td>每次请求的条数</td><td>10</td></tr>
+<tr><td>page</td><td>页数</td><td>页数</td></tr>
 </tbody>
 </table>
-    appid, sign, sign_method, tag，limit，page
 
 ##获取新闻接口，前三条为置顶新闻
 ###接口地址： http://api.doubi.so/news/
 ###参数说明：
-    tag：分类，page: 第几页，limit:每页最多显示的条数
+| tag | limil | page |
 ####分类列表:
 <table>
 <tbody>
