@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/aosencloud/!svn/ver/183/1/crossapp/server
+END
+aosenserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/aosencloud/!svn/ver/132/1/crossapp/server/aosenserver.py
+END
+settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/aosencloud/!svn/ver/165/1/crossapp/server/settings.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/aosencloud/!svn/ver/162/1/crossapp/server/utils.py
+END
+const.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/aosencloud/!svn/ver/162/1/crossapp/server/const.py
+END

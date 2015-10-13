@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/aosencloud/!svn/ver/182/1/crossapp/server/models
+END
+base.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/aosencloud/!svn/ver/162/1/crossapp/server/models/base.py
+END
+novelbase.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/aosencloud/!svn/ver/158/1/crossapp/server/models/novelbase.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/aosencloud/!svn/ver/120/1/crossapp/server/models/__init__.py
+END
+newsbase.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/aosencloud/!svn/ver/182/1/crossapp/server/models/newsbase.py
+END

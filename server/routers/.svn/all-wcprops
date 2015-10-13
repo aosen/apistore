@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/aosencloud/!svn/ver/162/1/crossapp/server/routers
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/aosencloud/!svn/ver/120/1/crossapp/server/routers/__init__.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/aosencloud/!svn/ver/162/1/crossapp/server/routers/urls.py
+END
