@@ -12,7 +12,7 @@ sys.setdefaultencoding('utf-8')
 
 
 class Application(models.Model):
-    #使用web api的app信息
+    """使用web api的app信息"""
 
     _secret = hashlib.md5(str(time.time()) + str(random.randint(1, int(time.time())))).hexdigest()
 
@@ -29,7 +29,7 @@ class Application(models.Model):
         return self.appsecret
 
 class Novel(models.Model):
-    #小说简介数据表
+    """小说简介数据表"""
     title = models.CharField(verbose_name="标题", max_length=200, unique=True) #小说
     first = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类
     second = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类
@@ -37,6 +37,7 @@ class Novel(models.Model):
     introduction = models.TextField(verbose_name="作品简介") #作品简介
     picture = models.CharField(verbose_name="图片", max_length=300) #图片
     novelsource = models.CharField(verbose_name="原文地址", max_length=300) #原文地址
+    novelpv = models.IntegerField(verbose_name="小说阅读量", default=0)
     createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
 
     class Meta:

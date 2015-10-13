@@ -57,7 +57,7 @@ class GetNovelList(Novel):
             raise ValueError(1)
         else:
             novel_list = self.novel.loadNovelList(first, second, page, limit)
-            result = [{'novelid': v['id'], 'title': v['title'], 'author': v['author'], 'introduction': v['introduction'], 'picture': "/static/spider/" + v['picture']} for v in novel_list]
+            result = [{'novelid': v['id'], 'title': v['title'], 'novelpv': v['novelpv'], 'author': v['author'], 'introduction': v['introduction'], 'picture': "/static/spider/" + v['picture']} for v in novel_list]
             self.write(json_success(result)) 
 
 
@@ -71,7 +71,7 @@ class GetNovelIntroduction(Novel):
     @utils.checkSign
     def post(self):
         novelid = self.get_argument("novelid", None)
-        if not id:
+        if not novelid:
             raise ValueError(1)
         else:
             intro = self.novel.loadNovelIntroduction(int(novelid))
@@ -93,7 +93,7 @@ class GetNovelChapter(Novel):
     @utils.checkSign
     def post(self):
         novelid = self.get_argument("novelid", None)
-        if not id:
+        if not novelid:
             raise ValueError(1)
         else:
             chapter_list = self.novel.loadNovelChapter(int(novelid))
@@ -111,7 +111,7 @@ class GetNovelContent(Novel):
     @utils.checkSign
     def post(self):
         chapterid = self.get_argument("chapterid", None)
-        if not id:
+        if not chapterid:
             raise ValueError(1)
         else:
             c = self.novel.loadNovelContent(int(chapterid))
@@ -120,3 +120,23 @@ class GetNovelContent(Novel):
             else:
                 result = {'title': c[0]['title'], 'subtitle': c[0]['subtitle'], 'novelid': c[0]['novelid'], 'content': c[0]['text']}
                 self.write(json_success(result))
+
+class NovelClick(Novel):
+    """计算小说点击数"""
+
+    def get(self):
+        return self.post()
+
+    @cache_error
+    @utils.checkSign
+    def post(self):
+        novelid = self.get_argument("novelid", None)
+        novelid = int(novelid) if novelid else None
+        if not novelid:
+            raise ValueError(1)
+        else:
+            if self.novel.loadNovelIntroduction(novelid).__len__() != 1:
+                raise ValueError(6)
+            n = self.novel.addNovelPv(novelid)[0]
+            result = {'novelid': n['id'], 'novelpv': n['novelpv']}
+            self.write(json_success(result))

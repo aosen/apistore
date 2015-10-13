@@ -47,3 +47,9 @@ class NovelBase(Base):
     def loadNovelContent(self, chapterid):
         sql = "SELECT * FROM content WHERE id=%s"
         return self.db.query(sql, chapterid)
+
+
+    def addNovelPv(self, novelid):
+        sql = "UPDATE novel SET novelpv=novelpv+1 WHERE id=%s"
+        self.db.execute(sql, novelid)
+        return self.loadNovelIntroduction(novelid)
