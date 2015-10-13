@@ -7,9 +7,9 @@ logger = logging.getLogger('crossapp')
 
 DEBUG = True
 #模板目录
-TEMPLATE_PATH = "/home/zhen/aosencloud/1/crossapp/template/" 
+TEMPLATE_PATH = "/home/zhen/crossapp/template/" 
 #静态文件目录
-STATIC_PATH = "/home/zhen/aosencloud/1/crossapp/static/" 
+STATIC_PATH = "/home/zhen/crossapp/static/" 
 #数据库信息
 HOME_PATH = os.getcwd()
 if socket.gethostname() == 'zhangzhen':
