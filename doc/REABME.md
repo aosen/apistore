@@ -44,6 +44,7 @@ pip install redis
 #从redis中进行搜索
 pip install tornado-redis
 yum install redis
+pip install pandas
 ```
 
 #技术关键点

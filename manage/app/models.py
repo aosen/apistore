@@ -48,6 +48,24 @@ class Novel(models.Model):
     def __unicode__(self):
         return self.title
 
+class Novelrank(models.Model):
+    """小说排名数据表"""
+    novelid = models.IntegerField(verbose_name="小说ID")
+    title = models.CharField(verbose_name="标题", max_length=200) #小说
+    first = models.IntegerField(verbose_name="一级分类") #一级分类
+    second = models.IntegerField(verbose_name="二级分类") #二级分类
+    author = models.CharField(verbose_name="作者", max_length=50) #作者
+    novelpv = models.IntegerField(verbose_name="小说阅读量")
+    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name = u'小说排名'
+        verbose_name_plural = u'小说排名'
+        db_table = 'novelrank'
+
+    def __unicode__(self):
+        return self.title
+
 class Content(models.Model):
     """小说内容，由爬虫抓取获得"""
     novelid = models.IntegerField(verbose_name="小说ID", db_index=True)

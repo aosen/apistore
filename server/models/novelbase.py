@@ -53,3 +53,8 @@ class NovelBase(Base):
         sql = "UPDATE novel SET novelpv=novelpv+1 WHERE id=%s"
         self.db.execute(sql, novelid)
         return self.loadNovelIntroduction(novelid)
+
+    def loadNovelRank(self, page, limit):
+        """获取小说排名列表"""
+        sql = "SELECT * FROM novelrank LIMIT %s,%s"
+        return self.db.query(sql, (page-1)*limit, limit)

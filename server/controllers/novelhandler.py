@@ -13,13 +13,12 @@ import const
 
 class Novel(RequestHandler):
     novel = NovelBase()
-
+    
+    def get(self):
+        return self.post()
 
 class GetTagList(Novel):
     """获取小说分类"""
-
-    def get(self):
-        return self.post()
 
     @cache_error
     @utils.checkSign
@@ -41,9 +40,6 @@ class GetTagList(Novel):
 class GetNovelList(Novel):
     """获取某分类下的小说列表"""
 
-    def get(self):
-        return self.post()
-
     @cache_error
     @utils.checkSign
     def post(self):
@@ -64,9 +60,6 @@ class GetNovelList(Novel):
 class GetNovelIntroduction(Novel):
     """获取小说简介"""
 
-    def get(self):
-        return self.post()
-
     @cache_error
     @utils.checkSign
     def post(self):
@@ -86,9 +79,6 @@ class GetNovelIntroduction(Novel):
 class GetNovelChapter(Novel):
     """获取小说的章节列表"""
 
-    def get(self):
-        return self.post()
-
     @cache_error
     @utils.checkSign
     def post(self):
@@ -103,9 +93,6 @@ class GetNovelChapter(Novel):
 
 class GetNovelContent(Novel):
     """获取小说的内容"""
-
-    def get(self):
-        return self.post()
 
     @cache_error
     @utils.checkSign
@@ -124,9 +111,6 @@ class GetNovelContent(Novel):
 class NovelClick(Novel):
     """计算小说点击数"""
 
-    def get(self):
-        return self.post()
-
     @cache_error
     @utils.checkSign
     def post(self):
@@ -140,3 +124,25 @@ class NovelClick(Novel):
             n = self.novel.addNovelPv(novelid)[0]
             result = {'novelid': n['id'], 'novelpv': n['novelpv']}
             self.write(json_success(result))
+
+
+class GetNovelRank(Novel):
+    """获取小说排名"""
+
+    @cache_error
+    @utils.checkSign
+    def post(self):
+        page = self.get_argument("page", None)
+        page = 1 if not page else int(page)
+        limit = self.get_argument("limit", None)
+        limit = const.NOVEL_LIMIT if not limit else int(limit)
+        novel_list = self.novel.loadNovelRank(page, limit)
+        result = [{
+            'novelid': v['novelid'], 
+            'title': v['title'], 
+            'novelpv': v['novelpv'], 
+            'author': v['author'], 
+            'first': v['first'], 
+            'second': v['second'], 
+            'rank': (page-1)*limit + i} for i, v in enumerate(novel_list, 1)]
+        self.write(json_success(result)) 
