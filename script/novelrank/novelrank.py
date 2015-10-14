@@ -3,8 +3,10 @@
 import pandas as pd
 import MySQLdb
 import datetime
+import sys
+sys.path.append('../../')
 
-from settings import DATABASES, logger
+from script.settings import DATABASES, logger
 
 if __name__ == "__main__":
     mysql_cn= MySQLdb.connect(
@@ -15,7 +17,7 @@ if __name__ == "__main__":
             charset="utf8")
     sql = "SELECT id, title, first, second, author, novelpv FROM novel"
     df = pd.read_sql(sql, con=mysql_cn)
-    df = df.sort(columns='novelpv', ascending=False)
+    df = df.sort_values(by='novelpv', ascending=False)
     df.rename(columns={'id': 'novelid'}, inplace=True)
     df['createtime'] = datetime.date.today()
     """
