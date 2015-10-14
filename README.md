@@ -115,6 +115,16 @@ http://api.doubi.so/novelclick/
 上传用户小说点击数，用来记录小说总阅读数
 ####参数：
 novelid
-####返回字段
+####返回字段：
 novelid， novelpv(当前novelid的对应的小说阅读量)
+
+###获取小说排名
+####接口地址：
+http://api.doubi.so/novelrank/
+####接口描述：
+获取小说热度排行榜
+####参数：
+page / limit
+####返回字段：
+novelid / title / novelpv / author / first / second / rank(排名)
     
