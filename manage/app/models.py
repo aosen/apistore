@@ -54,6 +54,7 @@ class Novelrank(models.Model):
     title = models.CharField(verbose_name="标题", max_length=200) #小说
     first = models.IntegerField(verbose_name="一级分类") #一级分类
     second = models.IntegerField(verbose_name="二级分类") #二级分类
+    picture = models.CharField(verbose_name="图片", max_length=300) #图片
     author = models.CharField(verbose_name="作者", max_length=50) #作者
     novelpv = models.IntegerField(verbose_name="小说阅读量")
     createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)

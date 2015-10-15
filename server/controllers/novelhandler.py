@@ -144,5 +144,6 @@ class GetNovelRank(Novel):
             'author': v['author'], 
             'first': v['first'], 
             'second': v['second'], 
+            'picture': v['picture'],
             'rank': (page-1)*limit + i} for i, v in enumerate(novel_list, 1)]
         self.write(json_success(result)) 
