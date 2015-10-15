@@ -71,8 +71,9 @@ tag / limit / page
 ###获取小说分类接口
 ####接口地址： 
 http://api.doubi.so/taglist/
-####参数说明:
-无
+####参数:
+first / second
+*注：如果获取全部分类目录 无需传first second
 ####返回字段： 
 first  second  name(二级分类名称)
 
