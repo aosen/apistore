@@ -1,0 +1,16 @@
+<uwsgi>
+   <socket>:8000</socket>
+   <listen>20</listen>
+   <master>true</master>
+   <pidfile>/usr/local/nginx/uwsgi.pid</pidfile>
+   <processes>4</processes>
+   <module>wsgi</module>
+   #这个文件下面要建立
+   <pythonpath>/home/zhen/aosencloud/1/crossapp/manage/</pythonpath>
+   #刚才建立项目的路径
+   <profiler>true</profiler>
+   <memory-report>true</memory-report>
+   <enable-threads>true</enable-threads>
+   <logdate>true</logdate>
+   <limit-as>6048</limit-as>
+</uwsgi>
