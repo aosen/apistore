@@ -3,7 +3,6 @@
 import json
 import datetime
 
-
 from tornado.web import RequestHandler
 
 from models.novelbase import NovelBase

@@ -9,6 +9,7 @@ from controllers.novelhandler import NovelClick
 from controllers.novelhandler import GetNovelRank
 from controllers.newshandler import GetSinaGirl
 from controllers.newshandler import GetNews
+from controllers.cuthandler import Cut
 
 urlpatterns = [
             (r"/", MainHandler),
@@ -21,4 +22,5 @@ urlpatterns = [
             (r"/novelrank/", GetNovelRank),
             (r"/newsgirlpic/", GetSinaGirl),
             (r"/news/", GetNews),
+            (r"/cut/", Cut),
         ]
