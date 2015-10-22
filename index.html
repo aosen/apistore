@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Apistore by aosen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Apistore</h1>
+      <h2 class="project-tagline">各种有用的web api 基于tornado／django／scrapy</h2>
+      <a href="https://github.com/aosen/apistore" class="btn">View on GitHub</a>
+      <a href="https://github.com/aosen/apistore/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/aosen/apistore/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="web-api" class="anchor" href="#web-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>WEB API</h1>
+
+<ol>
+<li>基于json通信</li>
+<li>基于POST方法</li>
+</ol>
+
+<h2>
+<a id="web-api-签名验证" class="anchor" href="#web-api-%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>web api 签名验证</h2>
+
+<h3>
+<a id="签名方法" class="anchor" href="#%E7%AD%BE%E5%90%8D%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>签名方法</h3>
+
+<p>调用 API 时需要对请求参数(除sign)进行签名验证，服务器会对该请求参数进行验证是否合法的。方法如下：
+根据参数名称（除签名和图片文件）将所有请求参数按照字母先后顺序排序:key + value .... key + value
+例如：将foo=1,bar=2,baz=3 排序为bar=2,baz=3,foo=1，参数名和参数值链接后，得到拼装字符串bar2baz3foo1</p>
+
+<h3>
+<a id="系统暂时只支持md5加密方式" class="anchor" href="#%E7%B3%BB%E7%BB%9F%E6%9A%82%E6%97%B6%E5%8F%AA%E6%94%AF%E6%8C%81md5%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>系统暂时只支持MD5加密方式：</h3>
+
+<ol>
+<li>md5：将 appsecret 拼接到参数字符串头、尾进行md5加密，格式是：md5(appsecretkey1value1key2value2...appsecret)</li>
+<li>我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。</li>
+<li>以下所有api均需要以下参数： appid， sign_method, sign</li>
+</ol>
+
+<h2>
+<a id="错误列表" class="anchor" href="#%E9%94%99%E8%AF%AF%E5%88%97%E8%A1%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>错误列表</h2>
+
+<table>
+<tbody>
+<tr>
+<td><em>err</em></td>
+<td><em>errmsg</em></td>
+<td><em>描述</em></td>
+</tr>
+<tr>
+<td>1</td>
+<td>参数不正确</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>验证失败</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>缺少sign_method</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>缺少sign参数</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>非法用户</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>不存在</td>
+<td></td>
+</tr>
+<tr>
+<td>500</td>
+<td>未知错误</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="中文分词" class="anchor" href="#%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D" aria-hidden="true"><span class="octicon octicon-link"></span></a>中文分词</h2>
+
+<h3>
+<a id="参数列表" class="anchor" href="#%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数列表</h3>
+
+<table>
+<tbody>
+<tr>
+<td><em>参数名</em></td>
+<td><em>描述</em></td>
+<td><em>默认值</em></td>
+</tr>
+<tr>
+<td>appid</td>
+<td>应用ID</td>
+<td>您自己的appid</td>
+</tr>
+<tr>
+<td>sign_method</td>
+<td>签名方式</td>
+<td>目前支持MD5</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>签名</td>
+<td>MD5加密后结果</td>
+</tr>
+<tr>
+<td>text</td>
+<td>文本</td>
+<td>要被分词的文本</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>模式</td>
+<td>0 普通模式 1 搜索引擎模式</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="获取分词结果接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%88%86%E8%AF%8D%E7%BB%93%E6%9E%9C%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取分词结果接口</h3>
+
+<h4>
+<a id="接口地址" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+
+<p><a href="http://api.doubi.so/cut/">http://api.doubi.so/cut/</a></p>
+
+<h4>
+<a id="参数" class="anchor" href="#%E5%8F%82%E6%95%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+
+<p>text / mode</p>
+
+<h4>
+<a id="返回字段" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+
+<p>text（分词）/ pos（词性）</p>
+
+<h2>
+<a id="新闻web-api" class="anchor" href="#%E6%96%B0%E9%97%BBweb-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>新闻WEB API</h2>
+
+<h3>
+<a id="参数列表-1" class="anchor" href="#%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数列表：</h3>
+
+<table>
+<tbody>
+<tr>
+<td><em>参数名</em></td>
+<td><em>描述</em></td>
+<td><em>默认值</em></td>
+</tr>
+<tr>
+<td>appid</td>
+<td>应用ID</td>
+<td>您自己的appid</td>
+</tr>
+<tr>
+<td>sign_method</td>
+<td>签名方式</td>
+<td>目前支持MD5</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>签名</td>
+<td>MD5加密后结果</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>分类</td>
+<td>分类见下表</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>每次请求的条数</td>
+<td>10</td>
+</tr>
+<tr>
+<td>page</td>
+<td>页数</td>
+<td>页数</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="获取新闻接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E6%96%B0%E9%97%BB%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取新闻接口</h3>
+
+<h4>
+<a id="接口地址-1" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/news/">http://api.doubi.so/news/</a></p>
+
+<h4>
+<a id="参数-1" class="anchor" href="#%E5%8F%82%E6%95%B0-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数：</h4>
+
+<p>tag / limit / page</p>
+
+<h5>
+<a id="分类列表" class="anchor" href="#%E5%88%86%E7%B1%BB%E5%88%97%E8%A1%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>分类列表:</h5>
+
+<table>
+<tbody>
+<tr>
+<td><em>标签</em></td>
+<td>推荐</td>
+<td>热点</td>
+<td>社会</td>
+<td>娱乐</td>
+<td>科技</td>
+<td>汽车</td>
+<td>时尚</td>
+</tr>
+<tr>
+<td><em>字段</em></td>
+<td>__all__</td>
+<td>news_hot</td>
+<td>news_society</td>
+<td>news_entertainment</td>
+<td>news_tech</td>
+<td>news_car</td>
+<td>news_fashion</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="获取美女图片接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E7%BE%8E%E5%A5%B3%E5%9B%BE%E7%89%87%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取美女图片接口</h3>
+
+<h4>
+<a id="接口地址-2" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/newsgirlpic/">http://api.doubi.so/newsgirlpic/</a></p>
+
+<h4>
+<a id="参数-2" class="anchor" href="#%E5%8F%82%E6%95%B0-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数：</h4>
+
+<p>tag / limit / page</p>
+
+<h5>
+<a id="获取全部美女图片分类-tag为空" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%85%A8%E9%83%A8%E7%BE%8E%E5%A5%B3%E5%9B%BE%E7%89%87%E5%88%86%E7%B1%BB-tag%E4%B8%BA%E7%A9%BA" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取全部美女图片分类: tag为空</h5>
+
+<h5>
+<a id="获取分类下的图片-tag可选参数如下" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%88%86%E7%B1%BB%E4%B8%8B%E7%9A%84%E5%9B%BE%E7%89%87-tag%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0%E5%A6%82%E4%B8%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取分类下的图片: tag可选参数如下</h5>
+
+<table>
+<tbody>
+<tr>
+<td><em>标签</em></td>
+<td>视觉大片</td>
+<td>八卦</td>
+<td>服饰搭配</td>
+<td>美体瘦身</td>
+<td>彩妆美发</td>
+</tr>
+<tr>
+<td><em>字段</em></td>
+<td>photograph_gallery</td>
+<td>gossip</td>
+<td>style</td>
+<td>body</td>
+<td>beauty</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="小说web-api" class="anchor" href="#%E5%B0%8F%E8%AF%B4web-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>小说WEB API</h2>
+
+<h3>
+<a id="参数列表-2" class="anchor" href="#%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数列表：</h3>
+
+<table>
+<tbody>
+<tr>
+<td><em>参数名</em></td>
+<td><em>描述</em></td>
+<td><em>默认值</em></td>
+</tr>
+<tr>
+<td>appid</td>
+<td>应用ID</td>
+<td>您自己的appid</td>
+</tr>
+<tr>
+<td>sign_method</td>
+<td>签名方式</td>
+<td>目前支持MD5</td>
+</tr>
+<tr>
+<td>sign</td>
+<td>签名</td>
+<td>MD5加密后结果</td>
+</tr>
+<tr>
+<td>first</td>
+<td>一级分类 1：男 0：女</td>
+<td>无</td>
+</tr>
+<tr>
+<td>second</td>
+<td>二级分类，按小说内容</td>
+<td>无</td>
+</tr>
+<tr>
+<td>novelid</td>
+<td>小说ID</td>
+<td>无</td>
+</tr>
+<tr>
+<td>chapterid</td>
+<td>章节ID</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="获取小说分类接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%B0%8F%E8%AF%B4%E5%88%86%E7%B1%BB%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取小说分类接口</h3>
+
+<h4>
+<a id="接口地址-3" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+
+<p><a href="http://api.doubi.so/taglist/">http://api.doubi.so/taglist/</a></p>
+
+<h4>
+<a id="参数-3" class="anchor" href="#%E5%8F%82%E6%95%B0-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+
+<p>first / second
+*注：如果获取全部分类目录 无需传first second</p>
+
+<h4>
+<a id="返回字段-1" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+
+<p>first  second  name(二级分类名称)</p>
+
+<h3>
+<a id="获取某分类下的小说列表接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E6%9F%90%E5%88%86%E7%B1%BB%E4%B8%8B%E7%9A%84%E5%B0%8F%E8%AF%B4%E5%88%97%E8%A1%A8%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取某分类下的小说列表接口</h3>
+
+<h4>
+<a id="接口地址-4" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+
+<p><a href="http://api.doubi.so/novellist/">http://api.doubi.so/novellist/</a> </p>
+
+<h4>
+<a id="参数-4" class="anchor" href="#%E5%8F%82%E6%95%B0-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+
+<p>first / second</p>
+
+<h4>
+<a id="返回字段-2" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+
+<p>title， novelid, author, picture, introduction</p>
+
+<h3>
+<a id="获取小说简介接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%B0%8F%E8%AF%B4%E7%AE%80%E4%BB%8B%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取小说简介接口</h3>
+
+<h4>
+<a id="接口地址-5" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/novelintroduction/">http://api.doubi.so/novelintroduction/</a></p>
+
+<h4>
+<a id="参数说明" class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数说明：</h4>
+
+<p>novelid</p>
+
+<h4>
+<a id="返回字段-3" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段：</h4>
+
+<p>title, novelid, author, picture, introduction</p>
+
+<h3>
+<a id="获取小说的章节列表接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%B0%8F%E8%AF%B4%E7%9A%84%E7%AB%A0%E8%8A%82%E5%88%97%E8%A1%A8%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取小说的章节列表接口</h3>
+
+<h4>
+<a id="接口地址-6" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/novelchapter/">http://api.doubi.so/novelchapter/</a></p>
+
+<h4>
+<a id="参数说明-1" class="anchor" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数说明：</h4>
+
+<p>novelid</p>
+
+<h4>
+<a id="返回字段-4" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段：</h4>
+
+<p>title(小说标题), subtitle(小说章节标题)， chapterid(章节id), novelid , author, picture, introduction</p>
+
+<h3>
+<a id="获取章节内容接口" class="anchor" href="#%E8%8E%B7%E5%8F%96%E7%AB%A0%E8%8A%82%E5%86%85%E5%AE%B9%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取章节内容接口</h3>
+
+<h4>
+<a id="接口地址-7" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/novelcontent/">http://api.doubi.so/novelcontent/</a></p>
+
+<h4>
+<a id="参数-5" class="anchor" href="#%E5%8F%82%E6%95%B0-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数：</h4>
+
+<p>chapterid</p>
+
+<h4>
+<a id="返回字段-5" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段：</h4>
+
+<p>title(小说标题), subtitle(小说章节标题), novelid(小说ID), content(内容)</p>
+
+<h3>
+<a id="小说点击事件上传" class="anchor" href="#%E5%B0%8F%E8%AF%B4%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E4%B8%8A%E4%BC%A0" aria-hidden="true"><span class="octicon octicon-link"></span></a>小说点击事件上传</h3>
+
+<h4>
+<a id="接口地址-8" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/novelclick/">http://api.doubi.so/novelclick/</a></p>
+
+<h4>
+<a id="接口描述" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述：</h4>
+
+<p>上传用户小说点击数，用来记录小说总阅读数</p>
+
+<h4>
+<a id="参数-6" class="anchor" href="#%E5%8F%82%E6%95%B0-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数：</h4>
+
+<p>novelid</p>
+
+<h4>
+<a id="返回字段-6" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段：</h4>
+
+<p>novelid， novelpv(当前novelid的对应的小说阅读量)</p>
+
+<h3>
+<a id="获取小说排名" class="anchor" href="#%E8%8E%B7%E5%8F%96%E5%B0%8F%E8%AF%B4%E6%8E%92%E5%90%8D" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取小说排名</h3>
+
+<h4>
+<a id="接口地址-9" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址：</h4>
+
+<p><a href="http://api.doubi.so/novelrank/">http://api.doubi.so/novelrank/</a></p>
+
+<h4>
+<a id="接口描述-1" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述：</h4>
+
+<p>获取小说热度排行榜</p>
+
+<h4>
+<a id="参数-7" class="anchor" href="#%E5%8F%82%E6%95%B0-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数：</h4>
+
+<p>page / limit</p>
+
+<h4>
+<a id="返回字段-7" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段：</h4>
+
+<p>novelid / title / novelpv / picture / author / first / second / rank(排名)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/aosen/apistore">Apistore</a> is maintained by <a href="https://github.com/aosen">aosen</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
