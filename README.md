@@ -13,6 +13,40 @@
 2. 我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 3. 以下所有api均需要以下参数： appid， sign_method, sign
 
+##错误列表
+<table>
+<tbody>
+<tr><td><em>err</em></td><td><em>errmsg</em></td><td><em>描述</em></td></tr>
+<tr><td>1</td><td>参数不正确</td><td></td></tr>
+<tr><td>2</td><td>验证失败</td><td></td></tr>
+<tr><td>3</td><td>缺少sign_method</td><td></td></tr>
+<tr><td>4</td><td>缺少sign参数</td><td></td></tr>
+<tr><td>5</td><td>非法用户</td><td></td></tr>
+<tr><td>6</td><td>不存在</td><td></td></tr>
+<tr><td>500</td><td>未知错误</td><td></td></tr>
+</tbody>
+</table>
+
+##中文分词
+###参数列表
+<table>
+<tbody>
+<tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
+<tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
+<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign</td><td>签名</td><td>MD5加密后结果</td></tr>
+<tr><td>text</td><td>文本</td><td>要被分词的文本</td></tr>
+<tr><td>mode</td><td>模式</td><td>0 普通模式 1 搜索引擎模式</td></tr>
+</tbody>
+</table>
+###获取分词结果接口
+####接口地址
+http://api.doubi.so/cut/
+####参数
+text / mode
+####返回字段
+text（分词）/ pos（词性）
+
 ##新闻WEB API
 ###参数列表：
 <table>
@@ -20,7 +54,7 @@
 <tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
 <tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
 <tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
-<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign</td><td>签名</td><td>MD5加密后结果</td></tr>
 <tr><td>tag</td><td>分类</td><td>分类见下表</td></tr>
 <tr><td>limit</td><td>每次请求的条数</td><td>10</td></tr>
 <tr><td>page</td><td>页数</td><td>页数</td></tr>
@@ -61,7 +95,7 @@ tag / limit / page
 <tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
 <tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
 <tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
-<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign</td><td>签名</td><td>MD5加密后结果</td></tr>
 <tr><td>first</td><td>一级分类 1：男 0：女</td><td>无</td></tr>
 <tr><td>second</td><td>二级分类，按小说内容</td><td>无</td></tr>
 <tr><td>novelid</td><td>小说ID</td><td>无</td></tr>
@@ -69,20 +103,20 @@ tag / limit / page
 </tbody>
 </table>
 ###获取小说分类接口
-####接口地址： 
+####接口地址
 http://api.doubi.so/taglist/
-####参数:
+####参数
 first / second
 *注：如果获取全部分类目录 无需传first second
-####返回字段： 
+####返回字段 
 first  second  name(二级分类名称)
 
 ###获取某分类下的小说列表接口
-####接口地址： 
+####接口地址 
 http://api.doubi.so/novellist/ 
-####参数:
+####参数
 first / second
-####返回字段：
+####返回字段
 title， novelid, author, picture, introduction
 
 ###获取小说简介接口
