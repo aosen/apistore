@@ -17,4 +17,4 @@ class NewsBase(Base):
 
     def loadNews(self, tag, page, limit):
         sql = "SELECT * FROM news WHERE tag=%s LIMIT %s, %s"
-        return self.db.query(sql, tag, -(page-1)*limit, -limit)
+        return self.db.query(sql, tag, (page-1)*limit, limit)
