@@ -48,6 +48,18 @@ class NovelBase(Base):
         sql = "SELECT * FROM content WHERE id=%s"
         return self.db.query(sql, chapterid)
 
+    def loadPrevNext(self, chapter):
+        """根据chapterid获取上一章节的chapterid和下一章节的chapterid"""
+        p = n = 0
+        sql = "SELECT * FROM chapter WHERE chapter=%s"
+        pre = self.db.get(sql, chapter-1)
+        nex = self.db.get(sql, chapter+1)
+        if not pre:
+            p = pre['id']
+        if not nex:
+            n = nex['id']
+        return p, n
+
 
     def addNovelPv(self, novelid):
         sql = "UPDATE novel SET novelpv=novelpv+1 WHERE id=%s"
@@ -58,3 +70,4 @@ class NovelBase(Base):
         """获取小说排名列表"""
         sql = "SELECT * FROM novelrank LIMIT %s,%s"
         return self.db.query(sql, (page-1)*limit, limit)
+
