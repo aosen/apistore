@@ -34,7 +34,7 @@ class GetSinaGirl(news):
         return self.post()
 
     @utils.cache_error
-    #@utils.checkSign
+    @utils.checkSign
     def post(self):
         tag = self.get_argument("tag", None)
         tag = tag if tag in self.l else None
@@ -70,7 +70,7 @@ class GetNews(news):
         return self.post()
 
     @utils.cache_error
-    #@utils.checkSign
+    @utils.checkSign
     def post(self):
         tag = self.get_argument('tag', None)
         tag = tag if tag in self.l else '__all__'

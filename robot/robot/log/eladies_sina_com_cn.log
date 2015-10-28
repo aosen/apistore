@@ -1,0 +1,104 @@
+2015-10-28 11:45:42 [scrapy] INFO: Scrapy 1.0.3 started (bot: robot)
+2015-10-28 11:45:42 [scrapy] INFO: Optional features available: ssl, http11
+2015-10-28 11:45:42 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'robot.spiders', 'LOG_LEVEL': 'INFO', 'CONCURRENT_REQUESTS': 100, 'SPIDER_MODULES': ['robot.spiders', 'robot.novel', 'robot.news'], 'BOT_NAME': 'robot', 'COOKIES_ENABLED': False, 'REDIRECT_ENABLED': False, 'LOG_FILE': 'log/eladies_sina_com_cn.log'}
+2015-10-28 11:45:44 [scrapy] INFO: Enabled extensions: CloseSpider, TelnetConsole, LogStats, CoreStats, SpiderState
+2015-10-28 11:45:44 [scrapy] INFO: Enabled downloader middlewares: ProxyMiddleware, HttpAuthMiddleware, DownloadTimeoutMiddleware, RandomUserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2015-10-28 11:45:44 [scrapy] INFO: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2015-10-28 11:45:44 [scrapy] INFO: Enabled item pipelines: ImagePipeline, RobotPipeline
+2015-10-28 11:45:44 [scrapy] INFO: Spider opened
+2015-10-28 11:45:44 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2015-10-28 11:45:44 [robot] INFO: [2015-10-28] http://eladies.sina.com.cn/photo/
+2015-10-28 11:45:44 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:54: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  hxs = HtmlXPathSelector(response)
+
+2015-10-28 11:45:44 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:68: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  sites = hxs.select('//div[@id="%s"]/div/div/a/@href' % d['id']).extract()
+
+2015-10-28 11:45:44 [py.warnings] WARNING: /usr/local/lib/python2.7/site-packages/scrapy/selector/unified.py:108: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  for x in result]
+
+2015-10-28 11:45:45 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:75: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  hxs = HtmlXPathSelector(response)
+
+2015-10-28 11:45:45 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:77: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  item['title'] = hxs.select('//div[@id="eData"]/dl[1]/dt/text()').extract()[0]
+
+2015-10-28 11:45:45 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:78: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  picl = hxs.select('//div[@id="eData"]/dl/dd[1]/text()').extract()
+
+2015-10-28 11:45:45 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:79: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  descl = hxs.select('//div[@id="eData"]/dl/dd[5]/text()').extract()
+
+2015-10-28 11:45:47 [scrapy] INFO: Closing spider (finished)
+2015-10-28 11:45:47 [scrapy] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 27929,
+ 'downloader/request_count': 76,
+ 'downloader/request_method_count/GET': 76,
+ 'downloader/response_bytes': 1906825,
+ 'downloader/response_count': 76,
+ 'downloader/response_status_count/200': 76,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2015, 10, 28, 3, 45, 47, 244249),
+ 'item_scraped_count': 75,
+ 'log_count/INFO': 8,
+ 'log_count/WARNING': 7,
+ 'request_depth_max': 1,
+ 'response_received_count': 76,
+ 'scheduler/dequeued': 76,
+ 'scheduler/dequeued/memory': 76,
+ 'scheduler/enqueued': 76,
+ 'scheduler/enqueued/memory': 76,
+ 'start_time': datetime.datetime(2015, 10, 28, 3, 45, 44, 404259)}
+2015-10-28 11:45:47 [scrapy] INFO: Spider closed (finished)
+2015-10-28 11:55:36 [scrapy] INFO: Scrapy 1.0.3 started (bot: robot)
+2015-10-28 11:55:36 [scrapy] INFO: Optional features available: ssl, http11
+2015-10-28 11:55:36 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'robot.spiders', 'LOG_LEVEL': 'INFO', 'CONCURRENT_REQUESTS': 100, 'SPIDER_MODULES': ['robot.spiders', 'robot.novel', 'robot.news'], 'BOT_NAME': 'robot', 'COOKIES_ENABLED': False, 'REDIRECT_ENABLED': False, 'LOG_FILE': '/home/zhen/apistore/robot/robot/log/eladies_sina_com_cn.log'}
+2015-10-28 11:55:36 [scrapy] INFO: Enabled extensions: CloseSpider, TelnetConsole, LogStats, CoreStats, SpiderState
+2015-10-28 11:55:36 [scrapy] INFO: Enabled downloader middlewares: ProxyMiddleware, HttpAuthMiddleware, DownloadTimeoutMiddleware, RandomUserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2015-10-28 11:55:36 [scrapy] INFO: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2015-10-28 11:55:36 [scrapy] INFO: Enabled item pipelines: ImagePipeline, RobotPipeline
+2015-10-28 11:55:36 [scrapy] INFO: Spider opened
+2015-10-28 11:55:36 [scrapy] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2015-10-28 11:55:36 [robot] INFO: [2015-10-28] http://eladies.sina.com.cn/photo/
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:54: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  hxs = HtmlXPathSelector(response)
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:68: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  sites = hxs.select('//div[@id="%s"]/div/div/a/@href' % d['id']).extract()
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /usr/local/lib/python2.7/site-packages/scrapy/selector/unified.py:108: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  for x in result]
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:75: ScrapyDeprecationWarning: scrapy.selector.HtmlXPathSelector is deprecated, instantiate scrapy.Selector instead.
+  hxs = HtmlXPathSelector(response)
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:77: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  item['title'] = hxs.select('//div[@id="eData"]/dl[1]/dt/text()').extract()[0]
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:78: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  picl = hxs.select('//div[@id="eData"]/dl/dd[1]/text()').extract()
+
+2015-10-28 11:55:36 [py.warnings] WARNING: /home/zhen/apistore/robot/robot/news/eladies_sina_com_cn.py:79: ScrapyDeprecationWarning: Call to deprecated function select. Use .xpath() instead.
+  descl = hxs.select('//div[@id="eData"]/dl/dd[5]/text()').extract()
+
+2015-10-28 11:55:40 [scrapy] INFO: Closing spider (finished)
+2015-10-28 11:55:40 [scrapy] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 27943,
+ 'downloader/request_count': 76,
+ 'downloader/request_method_count/GET': 76,
+ 'downloader/response_bytes': 1906891,
+ 'downloader/response_count': 76,
+ 'downloader/response_status_count/200': 76,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2015, 10, 28, 3, 55, 40, 24353),
+ 'item_scraped_count': 75,
+ 'log_count/INFO': 8,
+ 'log_count/WARNING': 7,
+ 'request_depth_max': 1,
+ 'response_received_count': 76,
+ 'scheduler/dequeued': 76,
+ 'scheduler/dequeued/memory': 76,
+ 'scheduler/enqueued': 76,
+ 'scheduler/enqueued/memory': 76,
+ 'start_time': datetime.datetime(2015, 10, 28, 3, 55, 36, 540056)}
+2015-10-28 11:55:40 [scrapy] INFO: Spider closed (finished)
