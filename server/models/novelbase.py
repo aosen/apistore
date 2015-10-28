@@ -48,15 +48,15 @@ class NovelBase(Base):
         sql = "SELECT * FROM content WHERE id=%s"
         return self.db.query(sql, chapterid)
 
-    def loadPrevNext(self, chapter):
+    def loadPrevNext(self, chapter, novelid):
         """根据chapterid获取上一章节的chapterid和下一章节的chapterid"""
         p = n = 0
-        sql = "SELECT * FROM chapter WHERE chapter=%s"
-        pre = self.db.get(sql, chapter-1)
-        nex = self.db.get(sql, chapter+1)
-        if not pre:
+        sql = "SELECT * FROM content WHERE chapter=%s AND novelid=%s"
+        pre = self.db.get(sql, chapter-1, novelid)
+        nex = self.db.get(sql, chapter+1, novelid)
+        if pre:
             p = pre['id']
-        if not nex:
+        if nex:
             n = nex['id']
         return p, n
 
