@@ -104,7 +104,13 @@ class GetNovelContent(Novel):
             if c.__len__() != 1:
                 raise ValueError(500)
             else:
-                result = {'title': c[0]['title'], 'subtitle': c[0]['subtitle'], 'novelid': c[0]['novelid'], 'content': c[0]['text']}
+                result = {
+                        'title': c[0]['title'], 
+                        'subtitle': c[0]['subtitle'], 
+                        'novelid': c[0]['novelid'], 
+                        'content': c[0]['text'], 
+                        'chapterid': c[0]['id'],
+                        }
                 #获取上一章节和下一章节
                 result['prev'], result['next'] = self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))
                 self.write(json_success(result))
