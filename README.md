@@ -63,9 +63,9 @@ text（分词）/ pos（词性）
 
 ###获取新闻接口
 ####接口地址： 
-http://api.doubi.so/news/
+    http://api.doubi.so/news/
 ####参数：
-tag / limit / page
+    tag / limit / page
 #####分类列表:
 <table>
 <tbody>
@@ -76,9 +76,9 @@ tag / limit / page
 
 ###获取美女图片接口
 ####接口地址： 
-http://api.doubi.so/newsgirlpic/
+    http://api.doubi.so/newsgirlpic/
 ####参数：
-tag / limit / page
+    tag / limit / page
 #####获取全部美女图片分类: tag为空
 #####获取分类下的图片: tag可选参数如下
 <table>
@@ -104,62 +104,62 @@ tag / limit / page
 </table>
 ###获取小说分类接口
 ####接口地址
-http://api.doubi.so/taglist/
+    http://api.doubi.so/taglist/
 ####参数
 first / second
-*注：如果获取全部分类目录 无需传first second
+    *注：如果获取全部分类目录 无需传first second
 ####返回字段 
-first  second  name(二级分类名称)
+    first  second  name(二级分类名称)
 
 ###获取某分类下的小说列表接口
 ####接口地址 
-http://api.doubi.so/novellist/ 
+    http://api.doubi.so/novellist/ 
 ####参数
-first / second
+    first / second
 ####返回字段
-title， novelid, author, picture, introduction
+    title， novelid, author, picture, introduction
 
 ###获取小说简介接口
 ####接口地址： 
-http://api.doubi.so/novelintroduction/
+    http://api.doubi.so/novelintroduction/
 ####参数说明：
-novelid
+    novelid
 ####返回字段： 
-title, novelid, author, picture, introduction
+    title, novelid, author, picture, introduction
 
 ###获取小说的章节列表接口
 ####接口地址： 
-http://api.doubi.so/novelchapter/
+    http://api.doubi.so/novelchapter/
 ####参数说明：
-novelid
+    novelid
 ####返回字段：
-title(小说标题), subtitle(小说章节标题)， chapterid(章节id), novelid , author, picture, introduction
+    title(小说标题), subtitle(小说章节标题)， chapterid(章节id), novelid , author, picture, introduction
 
 ###获取章节内容接口
 ####接口地址： 
-http://api.doubi.so/novelcontent/
+    http://api.doubi.so/novelcontent/
 ####参数：
-chapterid
+    chapterid
 ####返回字段：
-title(小说标题), subtitle(小说章节标题), novelid(小说ID), content(内容)
+    title(小说标题), subtitle(小说章节标题), novelid(小说ID), content(内容), chapterid, prev(上一章节chapterid), next(下一章节chapterid)
 
 ###小说点击事件上传
 ####接口地址：
-http://api.doubi.so/novelclick/
+    http://api.doubi.so/novelclick/
 ####接口描述：
-上传用户小说点击数，用来记录小说总阅读数
+    上传用户小说点击数，用来记录小说总阅读数
 ####参数：
-novelid
+    novelid
 ####返回字段：
-novelid， novelpv(当前novelid的对应的小说阅读量)
+    novelid， novelpv(当前novelid的对应的小说阅读量)
 
 ###获取小说排名
 ####接口地址：
-http://api.doubi.so/novelrank/
+    http://api.doubi.so/novelrank/
 ####接口描述：
-获取小说热度排行榜
+    获取小说热度排行榜
 ####参数：
-page / limit
+    page / limit
 ####返回字段：
-novelid / title / novelpv / picture / author / first / second / rank(排名)
+    novelid / title / novelpv / picture / author / first / second / rank(排名)
     
