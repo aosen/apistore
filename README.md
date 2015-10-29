@@ -41,7 +41,7 @@
 </table>
 ###获取分词结果接口
 ####接口地址
-http://api.doubi.so/cut/
+    http://api.doubi.so/cut/
 ####参数
 text / mode
 ####返回字段
