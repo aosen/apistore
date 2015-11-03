@@ -28,6 +28,17 @@ class Application(models.Model):
     def __unicode__(self):
         return self.appsecret
 
+class Doc(models.Model):
+    """appid与docid列表"""
+    appid = models.ForeignKey(Application, verbose_name="AppID")
+    docids = models.TextField(verbose_name="文档列表")
+    createtime = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = u'文档列表'
+        verbose_name_plural = u'文档列表'
+        db_table = 'doc'
+
 class Novel(models.Model):
     """小说简介数据表"""
     title = models.CharField(verbose_name="标题", max_length=200, unique=True) #小说
