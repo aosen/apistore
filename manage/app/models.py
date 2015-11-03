@@ -139,3 +139,19 @@ class News(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class Video(models.Model):
+    """视频"""
+    title = models.CharField(verbose_name="标题", max_length=200)
+    intro = models.CharField(verbose_name="描述", max_length=800)
+    tag = models.CharField(verbose_name='分类', max_length=50)
+    image = models.CharField(verbose_name='图片', max_length=200)
+    video = models.CharField(verbose_name='视频', unique=True, max_length=200)
+
+    class Meta:
+        verbose_name = u'视频'
+        verbose_name_plural = u'视频'
+        db_table = 'video'
+
+    def __unicode__(self):
+        return self.title

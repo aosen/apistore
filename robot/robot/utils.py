@@ -7,7 +7,6 @@ def checkHave(func):
         try:
             result = db.get(sql, argument)
         except Exception as e:
-            print str(e)
             return None
         else:
             return result
