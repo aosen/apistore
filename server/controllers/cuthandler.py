@@ -10,7 +10,7 @@ import utils
 
 class Cut(tornado.web.RequestHandler):
     def initialize(self):
-        self.uri = "http://127.0.0.1:2019/"
+        self.uri = "http://127.0.0.1:2019/cut/"
         self.body = self.request.body
         self.headers = self.request.headers
 
