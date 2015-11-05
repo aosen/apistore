@@ -30,9 +30,10 @@ class Application(models.Model):
 
 class Doc(models.Model):
     """appid与docid列表"""
-    appid = models.ForeignKey(Application, verbose_name="AppID")
-    docids = models.TextField(verbose_name="文档列表")
-    createtime = models.DateTimeField(auto_now_add=True)
+    appid = models.ForeignKey(Application, verbose_name="AppID", unique=True)
+    maxdocid = models.BigIntegerField(verbose_name="文档列表")
+    createtime = models.CharField(verbose_name='创建时间', default=str(int(time.time())), max_length=10)
+    updatetime = models.CharField(verbose_name='更新时间', default=str(int(time.time())), max_length=10)
 
     class Meta:
         verbose_name = u'文档列表'

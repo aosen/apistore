@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from controllers.mainhandler import MainHandler
 from controllers.novelhandler import GetTagList
 from controllers.novelhandler import GetNovelList
 from controllers.novelhandler import GetNovelChapter
@@ -10,19 +9,21 @@ from controllers.novelhandler import GetNovelRank
 from controllers.newshandler import GetSinaGirl
 from controllers.newshandler import GetNews
 from controllers.cuthandler import Cut
-from controllers.searchhandler import Search
+from controllers.searchhandler import SearchAction, IndexAction
+from controllers.indexhandler import Index
 
 urlpatterns = [
-            (r"/", MainHandler),
-            (r"/taglist/", GetTagList),
-            (r"/novellist/", GetNovelList),
-            (r"/novelintroduction/", GetNovelIntroduction),
-            (r"/novelchapter/", GetNovelChapter),
-            (r"/novelcontent/", GetNovelContent),
-            (r"/novelclick/", NovelClick),
-            (r"/novelrank/", GetNovelRank),
-            (r"/newsgirlpic/", GetSinaGirl),
-            (r"/news/", GetNews),
-            (r"/cut/", Cut),
-            (r"/search/", Search),
+    (r"/", Index),
+    (r"/taglist/", GetTagList),
+    (r"/novellist/", GetNovelList),
+    (r"/novelintroduction/", GetNovelIntroduction),
+    (r"/novelchapter/", GetNovelChapter),
+    (r"/novelcontent/", GetNovelContent),
+    (r"/novelclick/", NovelClick),
+    (r"/novelrank/", GetNovelRank),
+    (r"/newsgirlpic/", GetSinaGirl),
+    (r"/news/", GetNews),
+    (r"/cut/", Cut),
+    (r"/index/", IndexAction),
+    (r"/search/", SearchAction),
         ]
