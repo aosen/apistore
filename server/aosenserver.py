@@ -5,7 +5,7 @@ import tornado.ioloop
 import tornado.options
 
 import routers.urls
-from settings import TEMPLATE_PATH, STATIC_PATH, DEBUG
+from settings import TEMPLATE_PATH, STATIC_PATH, DEBUG, logger
 
 from tornado.options import define, options
 define("host", default="127.0.0.1", help="run on the given host", type=str)
@@ -27,4 +27,5 @@ if __name__ == "__main__":
     tornado.options.parse_command_line()
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(options.port, address=options.host)
+    logger.info("start run server on: "+options.host+":"+str(options.port))
     tornado.ioloop.IOLoop.instance().start()

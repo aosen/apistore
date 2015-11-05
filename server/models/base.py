@@ -4,7 +4,6 @@
 import torndb
 
 from settings import DATABASES
-from settings import MEMCACHE
 
 class Base(object):
     """models的基类"""
