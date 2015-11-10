@@ -16,6 +16,8 @@ import sys
 sys.path.append('../../../')
 from conf import *
 
+DATABASES = DATABASES["default"]
+
 BOT_NAME = 'robot'
 
 SPIDER_MODULES = ['robot.spiders', 'robot.novel', 'robot.news']
