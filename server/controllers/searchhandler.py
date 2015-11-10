@@ -57,7 +57,7 @@ class IndexAction(Search):
         raise tornado.gen.Return(resp)
 
     @utils.cache_error
-    # @utils.checkSign
+    @utils.checkSign
     @tornado.gen.coroutine
     def post(self):
         self.appid = self.get_argument("appid", None)
@@ -129,7 +129,7 @@ class SearchAction(Search):
         raise tornado.gen.Return(resp)
 
     @utils.cache_error
-    #@utils.checkSign
+    @utils.checkSign
     @tornado.gen.coroutine
     def post(self):
         self.text = self.get_argument("text", None)
