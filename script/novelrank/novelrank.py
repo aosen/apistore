@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/python
 
 import pandas as pd
 import MySQLdb
 import datetime
 import sys
-sys.path.append('../../')
+sys.path.append("../../")
 
 from script.settings import DATABASES, logger
 
