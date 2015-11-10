@@ -29,7 +29,7 @@ class Process(Base):
         try:
             self.db.insert(sql, item['title'], item['desc'], item['tag'], item['image'], item['url'], item['createtime'])
         except Exception as e:
-            pass
+            print str(e)
         return item
 
 
