@@ -141,7 +141,6 @@ class SearchAction(Search):
             self.write(utils.json_failed(401))
         else:
             tmp = json.loads(self.response.body)["result"]
-            print tmp
             r = {}
             r["tokens"] = tmp["Tokens"]
             r["docs"] = [utils.decodeDocid(int(self.appid), int(docid['DocId'])) for docid in tmp["Docs"]]
