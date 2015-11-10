@@ -13,16 +13,17 @@
 2. 我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 3. 以下所有api均需要以下参数： appid， sign_method, sign
 
-##错误列表
+##状态码
 <table>
 <tbody>
 <tr><td><em>err</em></td><td><em>errmsg</em></td><td><em>描述</em></td></tr>
-<tr><td>1</td><td>参数不正确</td><td></td></tr>
-<tr><td>2</td><td>验证失败</td><td></td></tr>
-<tr><td>3</td><td>缺少sign_method</td><td></td></tr>
-<tr><td>4</td><td>缺少sign参数</td><td></td></tr>
-<tr><td>5</td><td>非法用户</td><td></td></tr>
-<tr><td>6</td><td>不存在</td><td></td></tr>
+<tr><td>200</td><td>成功</td><td></td></tr>
+<tr><td>401</td><td>参数不正确</td><td></td></tr>
+<tr><td>402</td><td>验证失败</td><td></td></tr>
+<tr><td>403</td><td>缺少sign_method</td><td></td></tr>
+<tr><td>404</td><td>缺少sign参数</td><td></td></tr>
+<tr><td>405</td><td>非法用户</td><td></td></tr>
+<tr><td>406</td><td>不存在</td><td></td></tr>
 <tr><td>500</td><td>未知错误</td><td></td></tr>
 </tbody>
 </table>
@@ -30,8 +31,8 @@
 ##Json返回格式
 ```
 {
-"err" : "错误码",
-"errmsg": "错误信息",
+"code" : "状态码",
+"desc": "描述",
 "result": "返回的数据结果"
 }
 ```
@@ -54,11 +55,17 @@
 ###获取搜索结果接口
 ####接口地址
     http://api.doubi.so/search/
+####参数
+    text / tags / docids (text与tags至少有一项不为空,docids为必填项) / timeout (可选)
+####返回字段
+    tokens (关键词列表) / dos (文档列表,已经排序好的) / timeout (是否超时,如果超时也会返回部分结果)
 ###上传需要被搜索的文档接口
 ####接口地址
     http://api.doubi.so/index/
 ####参数
     text / docid / tags
+####返回字段
+    如果成功返回空 / 失败返回错误信息
 
 ##中文分词
 ###参数列表

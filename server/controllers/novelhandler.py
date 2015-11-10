@@ -124,10 +124,10 @@ class NovelClick(Novel):
         novelid = self.get_argument("novelid", None)
         novelid = int(novelid) if novelid else None
         if not novelid:
-            raise ValueError(1)
+            raise ValueError(401)
         else:
             if self.novel.loadNovelIntroduction(novelid).__len__() != 1:
-                raise ValueError(6)
+                raise ValueError(406)
             n = self.novel.addNovelPv(novelid)[0]
             result = {'novelid': n['id'], 'novelpv': n['novelpv']}
             self.write(json_success(result))
