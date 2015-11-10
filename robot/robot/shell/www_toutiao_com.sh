@@ -1,3 +1,5 @@
-#! /bin/bash
-cd /home/zhen/apistore/robot/robot
-nohup scrapy crawl www_toutiao_com >> /home/zhen/apistore/robot/robot/log/www_toutiao_com.log&
+#!/bin/bash
+PATH=$PATH:/usr/local/bin
+export PATH
+cd /home/zhen/apistore/robot/robot/news
+scrapy crawl www_toutiao_com

@@ -1,3 +1,5 @@
-#! /bin/bash
-cd /home/zhen/apistore/robot/robot
-nohup scrapy crawl eladies_sina_com_cn >>/home/zhen/apistore/robot/robot/log/eladies_sina_com_cn.log&
+#!/bin/bash
+PATH=$PATH:/usr/local/bin
+export PATH
+cd /home/zhen/apistore/robot/robot/news
+scrapy crawl eladies_sina_com_cn
