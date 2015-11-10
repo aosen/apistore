@@ -8,7 +8,7 @@ import utils
 import const
 from basehandler import BaseHandler
 from models.searchbase import SearchBase
-
+from settings import searchserver
 
 class Search(BaseHandler):
     """
@@ -35,7 +35,7 @@ class Search(BaseHandler):
 
 class IndexAction(Search):
     def initialize(self):
-        self.uri = "http://127.0.0.1:2019/index/"
+        self.uri = searchserver+"index/"
         self.body = self.request.body
         self.headers = self.request.headers
         self.response = None
@@ -94,7 +94,7 @@ class SearchAction(Search):
         self.appid = self.get_argument("appid", None)
 
     def initialize(self):
-        self.uri = "http://127.0.0.1:2019/search/?"
+        self.uri = searchserver+"search/?"
         self.body = self.request.body
         self.headers = self.request.headers
 
