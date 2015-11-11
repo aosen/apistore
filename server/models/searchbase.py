@@ -9,7 +9,7 @@ DOCIDSIZE = 1000000000000
 
 class SearchBase(Base):
     def __init__(self):
-        pass
+        super(SearchBase, self).__init__()
 
     def loadDocids(self, appid, docids):
         """

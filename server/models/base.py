@@ -9,7 +9,7 @@ class Base(object):
     """models的基类"""
 
     def __init__(self):
-        pass
+        super(Base, self).__init__()
 
     def getAppSercet(self, appid):
         sql = "SELECT * FROM application WHERE id=%s"

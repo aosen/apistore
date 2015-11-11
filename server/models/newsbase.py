@@ -5,7 +5,7 @@ from base import Base
 class NewsBase(Base):
     """News models基类"""
     def __init__(self):
-        pass
+        super(NewsBase, self).__init__()
 
     def loadSinaGirlPic(self, cl, page, limit):
         if cl:

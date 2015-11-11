@@ -4,6 +4,7 @@ import json
 import tornado.gen
 import tornado.web
 import tornado.httpclient
+
 import utils
 import const
 from basehandler import BaseHandler
@@ -14,7 +15,15 @@ class Search(BaseHandler):
     """
     搜索工厂类
     """
-    fd = SearchBase()
+
+    def __init__(self, application, request, **kwargs):
+        super(Search, self).__init__(application, request, **kwargs)
+        self.body = None
+        self.headers = None
+        self.uri = None
+
+    def initialize(self):
+        self.fb = SearchBase()
 
     @tornado.gen.coroutine
     def client(self):
@@ -35,6 +44,7 @@ class Search(BaseHandler):
 
 class IndexAction(Search):
     def initialize(self):
+        super(IndexAction, self).initialize()
         self.uri = searchserver+"index/"
         self.body = self.request.body
         self.headers = self.request.headers
@@ -57,7 +67,7 @@ class IndexAction(Search):
         raise tornado.gen.Return(resp)
 
     @utils.cache_error
-    @utils.checkSign
+    #@utils.checkSign
     @tornado.gen.coroutine
     def post(self):
         self.appid = self.get_argument("appid", None)
@@ -76,7 +86,6 @@ class IndexAction(Search):
                     self.write(utils.json_failed(401))
                 else:
                     self.write(self.response.body)
-        self.finish()
 
     def on_finish(self):
         """
@@ -84,8 +93,9 @@ class IndexAction(Search):
         :return: 无
         """
         # 如果搜索引擎返回code=200, 则将索引信息加入mysql
-        if json.loads(self.response.body)["code"] == 200:
+        if self.response and json.loads(self.response.body)["code"] == 200:
             self.fd.addIndex(self.appid, self.docid)
+        super(IndexAction, self).on_finish()
 
 
 class SearchAction(Search):
@@ -94,6 +104,7 @@ class SearchAction(Search):
         self.appid = self.get_argument("appid", None)
 
     def initialize(self):
+        super(SearchAction, self).initialize()
         self.uri = searchserver+"search/?"
         self.body = self.request.body
         self.headers = self.request.headers

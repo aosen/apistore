@@ -6,7 +6,7 @@ from base import Base
 class NovelBase(Base):
     """novel model基础类"""
     def __init__(self):
-        pass
+        super(NovelBase, self).__init__()
 
 
     def loadAllTag(self):
