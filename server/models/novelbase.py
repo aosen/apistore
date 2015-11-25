@@ -52,8 +52,21 @@ class NovelBase(Base):
         """根据chapterid获取上一章节的chapterid和下一章节的chapterid"""
         p = n = 0
         sql = "SELECT * FROM content WHERE chapter=%s AND novelid=%s"
-        pre = self.db.get(sql, chapter-1, novelid)
-        nex = self.db.get(sql, chapter+1, novelid)
+        chapter_next = chapter_pre = chapter
+        nex = pre = None
+        #如果i超过3次，则说明已经到达末位
+        i = 3
+        while i != 0:
+            chapter_next += 1
+            nex = self.db.get(sql, chapter_next, novelid)
+            if nex:
+                break
+        while chapter_pre != 0:
+            chapter_pre -= 1
+            pre = self.db.get(sql, chapter_pre, novelid)
+            if pre:
+                break
+
         if pre:
             p = pre['id']
         if nex:
