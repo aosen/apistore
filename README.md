@@ -65,7 +65,7 @@
     tokens (关键词列表) / dos (文档列表,已经排序好的) / timeout (是否超时,如果超时也会返回部分结果)
 ###上传需要被搜索的文档接口
 ####接口地址
-    http://api.doubi.so/index/
+    /index/
 ####参数
     text / docid / tags
 ####返回字段
