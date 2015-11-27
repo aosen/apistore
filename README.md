@@ -13,6 +13,9 @@
 2. 我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 3. 以下所有api均需要以下参数： appid， sign_method, sign
 
+###api域名
+    http://api.9miao.com
+
 ##状态码
 <table>
 <tbody>
@@ -25,6 +28,7 @@
 <tr><td>405</td><td>非法用户</td><td></td></tr>
 <tr><td>406</td><td>不存在</td><td></td></tr>
 <tr><td>500</td><td>未知错误</td><td></td></tr>
+<tr><td>601</td><td>用户名已经存在</td><td></td></tr>
 </tbody>
 </table>
 
@@ -54,7 +58,7 @@
 </table>
 ###获取搜索结果接口
 ####接口地址
-    http://api.doubi.so/search/
+    /search/
 ####参数
     text / tags / docids (text与tags至少有一项不为空,docids为必填项) / timeout (可选)
 ####返回字段
@@ -81,14 +85,14 @@
 </table>
 ###获取分词结果接口
 ####接口地址
-    http://api.doubi.so/cut/
+    /cut/
 ####参数
 text / mode
 ####返回字段
 text（分词）/ pos（词性）
 
 ##新闻WEB API
-###参数列表：
+###参数列表
 <table>
 <tbody>
 <tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
@@ -102,11 +106,11 @@ text（分词）/ pos（词性）
 </table>
 
 ###获取新闻接口
-####接口地址： 
-    http://api.doubi.so/news/
-####参数：
+####接口地址 
+    /news/
+####参数
     tag / limit / page
-#####分类列表:
+#####分类列表
 <table>
 <tbody>
 <tr><td><em>标签</em></td><td>推荐</td><td>热点</td><td>社会</td><td>娱乐</td><td>科技</td><td>汽车</td><td>时尚</td></tr>
@@ -115,8 +119,8 @@ text（分词）/ pos（词性）
 </table>
 
 ###获取美女图片接口
-####接口地址： 
-    http://api.doubi.so/newsgirlpic/
+####接口地址 
+    /newsgirlpic/
 ####参数：
     tag / limit / page
 #####获取全部美女图片分类: tag为空
@@ -129,7 +133,7 @@ text（分词）/ pos（词性）
 </table>
 
 ##小说WEB API
-###参数列表：
+###参数列表
 <table>
 <tbody>
 <tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
@@ -144,7 +148,7 @@ text（分词）/ pos（词性）
 </table>
 ###获取小说分类接口
 ####接口地址
-    http://api.doubi.so/taglist/
+    /taglist/
 ####参数
 first / second
     *注：如果获取全部分类目录 无需传first second
@@ -153,53 +157,74 @@ first / second
 
 ###获取某分类下的小说列表接口
 ####接口地址 
-    http://api.doubi.so/novellist/ 
+    /novellist/ 
 ####参数
     first / second
 ####返回字段
     title， novelid, author, picture, introduction
 
 ###获取小说简介接口
-####接口地址： 
-    http://api.doubi.so/novelintroduction/
-####参数说明：
+####接口地址 
+    /novelintroduction/
+####参数说明
     novelid
-####返回字段： 
+####返回字段 
     title, novelid, author, picture, introduction
 
 ###获取小说的章节列表接口
-####接口地址： 
-    http://api.doubi.so/novelchapter/
-####参数说明：
+####接口地址 
+    /novelchapter/
+####参数说明
     novelid
-####返回字段：
+####返回字段
     title(小说标题), subtitle(小说章节标题)， chapterid(章节id), novelid , author, picture, introduction
 
 ###获取章节内容接口
-####接口地址： 
-    http://api.doubi.so/novelcontent/
-####参数：
+####接口地址 
+    /novelcontent/
+####参数
     chapterid
-####返回字段：
+####返回字段
     title(小说标题), subtitle(小说章节标题), novelid(小说ID), content(内容), chapterid, prev(上一章节chapterid), next(下一章节chapterid)
 
 ###小说点击事件上传
-####接口地址：
-    http://api.doubi.so/novelclick/
-####接口描述：
+####接口地址
+    /novelclick/
+####接口描述
     上传用户小说点击数，用来记录小说总阅读数
-####参数：
+####参数
     novelid
-####返回字段：
+####返回字段
     novelid， novelpv(当前novelid的对应的小说阅读量)
 
 ###获取小说排名
-####接口地址：
-    http://api.doubi.so/novelrank/
-####接口描述：
+####接口地址
+    /novelrank/
+####接口描述
     获取小说热度排行榜
-####参数：
+####参数
     page / limit
-####返回字段：
+####返回字段
     novelid / title / novelpv / picture / author / first / second / rank(排名)
     
+##用户认证接口
+###参数列表
+<table>
+<tbody>
+<tr><td><em>参数名</em></td><td><em>描述</em></td><td><em>默认值</em></td></tr>
+<tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
+<tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
+<tr><td>sign</td><td>签名</td><td>MD5加密后结果</td></tr>
+<tr><td>username</td><td>用户名</td><td>无</td></tr>
+<tr><td>password</td><td>密码</td><td>无</td></tr>
+</tbody>
+</table>
+###用户注册
+####接口地址
+    /register/
+####接口描述
+    用于开发者的用户注册
+####参数
+    username / password
+####返回字段
+    如果成功 code: 200 失败 code为相应错误码

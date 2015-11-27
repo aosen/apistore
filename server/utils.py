@@ -19,6 +19,8 @@ errcode = {
     405: "非法用户",
     406: "不存在",
     500: "未知错误",
+    #业务层面的错误
+    601: "用户名已经存在",
 }
 
 
@@ -118,3 +120,11 @@ def decodeDocid(appid, docid):
     :return: new_docid
     """
     return docid - appid * MAX_DOCID
+
+def encodePassword(password):
+    """
+    密码加密策略,采用sha1加密
+    :param password: 原始密码
+    :return: 加密后密码
+    """
+    return hashlib.sha1(password).hexdigest()
