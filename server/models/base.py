@@ -21,6 +21,7 @@ class Base(object):
 
     @property
     def db(self):
+        #此处后期需要改为连接池,将数据库连接放在启动服务器的时候
         return torndb.Connection(
                 DATABASES['HOST']+':'+DATABASES['PORT'], 
                 DATABASES['NAME'],

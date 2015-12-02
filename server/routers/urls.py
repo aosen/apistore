@@ -13,6 +13,7 @@ from controllers.cuthandler import Cut
 from controllers.searchhandler import SearchAction, IndexAction
 from controllers.indexhandler import Index
 from controllers.gotyehandler import GotyeToken
+from controllers.userauthhandler import RegisterAction
 
 urlpatterns = [
     (r"/", Index),
@@ -33,4 +34,6 @@ urlpatterns = [
     (r"/search/", SearchAction),
 
     (r"/imtoken/", GotyeToken),
+
+    (r"/register/",RegisterAction),
         ]

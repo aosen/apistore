@@ -167,3 +167,31 @@ class Video(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class UserInfo(models.Model):
+    """开发者的用户信息表"""
+    appid = models.ForeignKey(Application, verbose_name="AppID")
+    username = models.CharField(verbose_name="用户名", max_length=20)
+    createtime = models.CharField(verbose_name='创建时间', default=str(int(time.time())), max_length=10)
+    updatetime = models.CharField(verbose_name='更新时间', default=str(int(time.time())), max_length=10)
+
+    class Meta:
+        verbose_name = u'用户信息'
+        verbose_name_plural = u'用户信息'
+        db_table = 'userinfo'
+
+    def __unicode__(self):
+        return self.username
+
+class LocalAuth(models.Model):
+    """本地用户验证,相对与微信微博验证"""
+    userid = models.ForeignKey(UserInfo, verbose_name="UserID")
+    password = models.CharField(verbose_name="密码", max_length=50)
+
+    class Meta:
+        verbose_name = u'本地验证'
+        verbose_name_plural = u'本地验证'
+        db_table = 'localauth'
+
+    def __unicode__(self):
+        return userid
