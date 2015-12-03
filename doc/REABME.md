@@ -48,6 +48,14 @@ yum install redis
 pip install pandas
 ```
 
+##Golang源码
+###分词包
+github.com/aosen/cut
+###搜索包
+github.com/aosen/search
+###搜索服务器
+github.com/aosen/searchserver
+
 #技术关键点
 ##web api调用认证
 ##信息采集
@@ -55,3 +63,4 @@ pip install pandas
 2 动态载入user-agent from settings
 3 代理ip可用性检测脚本
 ##小说检索算法
+参见Golang源码
