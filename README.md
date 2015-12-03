@@ -216,7 +216,7 @@ first / second
 ####参数
     wd
 ####返回字段
-    id(即novelid) / title / novelpv / picture / author / first / second / introduction
+    id(即novelid) / title / novelpv / picture(在地址前加 http://api.9miao.com/static/spider/) / author / first / second / introduction
     
 ##用户认证接口
 ###参数列表
