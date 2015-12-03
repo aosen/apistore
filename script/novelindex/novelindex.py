@@ -176,7 +176,7 @@ if __name__ == "__main__":
     for second in secondlist:
         tagdict[second["id"]] = second["second"]
     #生成20个线程
-    clientNum = 100
+    clientNum = 500
     clientPoll = RpcClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
     for data in datalist:
