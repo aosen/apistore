@@ -103,14 +103,14 @@ class GetNovelContent(Novel):
     def post(self):
         chapterid = self.get_argument("chapterid", None)
         if not chapterid:
-            raise ValueError(1)
+            raise ValueError(401)
         else:
             c = self.novel.loadNovelContent(int(chapterid))
             if c.__len__() != 1:
                 raise ValueError(500)
             else:
                 result = {'title': c[0]['title'], 'subtitle': c[0]['subtitle'], 'novelid': c[0]['novelid'],
-                          'content': c[0]['text'], 'chapterid': c[0]['id'],
+                          'content': c[0]['text'].encode("utf-8"), 'chapterid': c[0]['id'],
                           'prev': self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))[0],
                           'next': self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))[1]}
                 #获取上一章节和下一章节
