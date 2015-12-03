@@ -5,11 +5,11 @@ import torndb
 
 from settings import DATABASES
 
-class Base(object):
+class BaseModel(object):
     """models的基类"""
 
     def __init__(self):
-        super(Base, self).__init__()
+        super(BaseModel, self).__init__()
 
     def getAppSercet(self, appid):
         sql = "SELECT * FROM application WHERE id=%s"

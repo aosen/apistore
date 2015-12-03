@@ -9,7 +9,7 @@ import json
 import urllib2
 
 from basehandler import BaseHandler
-from models.gotyebase import GotyeBase
+from models.gotyemodel import GotyeModel
 import utils
 
 class Token(object):
@@ -54,7 +54,7 @@ class Gotye(BaseHandler):
     Im 工厂类
     """
     def initialize(self):
-        self.fd = GotyeBase()
+        self.fd = GotyeModel()
 
 class GotyeToken(Gotye):
     """获取im token信息"""

@@ -4,14 +4,16 @@
 import pandas as pd
 import MySQLdb
 import datetime
-import sys
-sys.path.append("../../")
 
-from script.settings import DATABASES, logger
+import sys
+sys.path.append("../")
+
+from settings import DATABASES, logger
 
 if __name__ == "__main__":
     mysql_cn= MySQLdb.connect(
-            host=DATABASES['HOST'], 
+            host=DATABASES['HOST'],
+            port=int(DATABASES['PORT']),
             user=DATABASES['USER'], 
             passwd=DATABASES['PASSWORD'], 
             db=DATABASES['NAME'],

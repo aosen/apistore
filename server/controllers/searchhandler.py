@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import json
+import urllib
+
 import tornado.gen
 import tornado.web
 import tornado.httpclient
@@ -8,8 +10,12 @@ import tornado.httpclient
 import utils
 import const
 from basehandler import BaseHandler
-from models.searchbase import SearchBase
+from models.searchmodel import SearchModel
 from settings import searchserver
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 class Search(BaseHandler):
     """
@@ -18,12 +24,9 @@ class Search(BaseHandler):
 
     def __init__(self, application, request, **kwargs):
         super(Search, self).__init__(application, request, **kwargs)
-        self.body = None
-        self.headers = None
-        self.uri = None
 
     def initialize(self):
-        self.fb = SearchBase()
+        self.fd = SearchModel()
 
     @tornado.gen.coroutine
     def client(self):
@@ -56,36 +59,32 @@ class IndexAction(Search):
     @tornado.gen.coroutine
     @utils.cache_error
     def index(self):
-        if not self.appid:
-            raise tornado.gen.Return(401)
         self.docid = str(utils.encodeDocid(int(self.appid), int(self.docid)))
+        data = {"docid": self.docid}
         if self.tags:
-            self.uri = self.uri + "?text=" + self.text + "&docid=" + self.docid + "&tags=" + self.tags
-        else:
-            self.uri = self.uri + "?text=" + self.text + "&docid=" + self.docid
+            data["tags"] = self.tags
+        if self.text:
+            data["text"] = self.text
+        self.body = urllib.urlencode(data)
         resp = yield self.client()
         raise tornado.gen.Return(resp)
 
     @utils.cache_error
-    #@utils.checkSign
+    @utils.checkSign
     @tornado.gen.coroutine
     def post(self):
         self.appid = self.get_argument("appid", None)
         self.text = self.get_argument("text", None)
         self.docid = self.get_argument("docid", None)
         self.tags = self.get_argument("tags", None)
+        #检测text tags的长度
+        if self.text and len(self.text) > const.MAX_TEXT_TAGS or self.tags and len(self.tags) > const.MAX_TEXT_TAGS:
+            self.write(utils.json_failed(401))
         if not self.text or int(self.docid) < 1 or int(self.docid) > const.MAX_DOCID:
             self.write(utils.json_failed(401))
         else:
-            try:
-                self.response = yield self.index()
-            except Exception as e:
-                self.write(utils.json_failed(500))
-            else:
-                if self.response == 401:
-                    self.write(utils.json_failed(401))
-                else:
-                    self.write(self.response.body)
+            self.response = yield self.index()
+            self.write(self.response.body)
 
     def on_finish(self):
         """

@@ -6,7 +6,7 @@ import tornado.web
 
 import utils
 from basehandler import BaseHandler
-from models.userauthbase import UserAuthBase
+from models.userauthmodel import UserAuthModel
 
 class UserAuth(BaseHandler):
     """用户验证工厂类"""
@@ -14,7 +14,7 @@ class UserAuth(BaseHandler):
         super(UserAuth, self).__init__(application, request, **kwargs)
 
     def initialize(self):
-        self.fd = UserAuthBase()
+        self.fd = UserAuthModel()
 
 def check_register_arg(func):
     def wrapper(*args, **kwargs):

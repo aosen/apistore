@@ -2,12 +2,12 @@
 
 import time
 
-from base import Base
+from basemodel import BaseModel
 import utils
 
-class UserAuthBase(Base):
+class UserAuthModel(BaseModel):
     def __init__(self):
-        super(UserAuthBase, self).__init__()
+        super(UserAuthModel, self).__init__()
 
     def haveUserName(self, appid, username):
         """

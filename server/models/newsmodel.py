@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from base import Base
+from basemodel import BaseModel
 
-class NewsBase(Base):
+class NewsModel(BaseModel):
     """News models基类"""
     def __init__(self):
-        super(NewsBase, self).__init__()
+        super(NewsModel, self).__init__()
 
     def loadSinaGirlPic(self, cl, page, limit):
         if cl:

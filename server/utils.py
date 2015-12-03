@@ -7,9 +7,13 @@ import traceback
 
 import tornado.gen
 
-from models.base import Base
+from models.basemodel import BaseModel
 from settings import logger
 from const import MAX_DOCID
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 errcode = {
     401: "参数不正确",
@@ -77,7 +81,7 @@ def checkSign(func):
         if not appid:
             raise ValueError(405)
 
-        model_base = Base()
+        model_base = BaseModel()
         arguments = sorted(self.request.arguments.iteritems(), key=lambda x: x[0])
         result_string = ''.join([k + v[0] for k, v in arguments if k != 'sign'])
         appsecret = model_base.getAppSercet(appid)

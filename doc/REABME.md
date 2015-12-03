@@ -38,6 +38,7 @@ pip install pylibmc
 ```
 ##其他依赖的软件包
 ```bash
+pip install gevent
 pip install Pillow
 #每天定时将最新需要搜索的内容更新至redis
 pip install redis

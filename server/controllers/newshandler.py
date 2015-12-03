@@ -9,11 +9,11 @@ import tornado.gen
 
 import utils
 import const
-from models.newsbase import NewsBase
+from models.newsmodel import NewsModel
 
 class news(RequestHandler):
     """news的基类"""
-    news = NewsBase()
+    news = NewsModel()
 
 class GetSinaGirl(news):
     """获取新浪女孩的列表"""

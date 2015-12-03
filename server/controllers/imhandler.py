@@ -4,7 +4,7 @@
 IM web api
 """
 
-from models.imbase import ImBase
+from models.immodel import ImModel
 
 
 class Im(BaseHandler):
@@ -12,7 +12,7 @@ class Im(BaseHandler):
     Im 工厂类
     """
     def initialize(self):
-        self.fd = ImBase()
+        self.fd = ImModel()
         self.token = None
         self.getTokenUrl = "https://api.gotye.com.cn/api/accessToken"
 

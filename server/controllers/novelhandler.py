@@ -3,15 +3,19 @@
 import json
 import datetime
 
-from tornado.web import RequestHandler
+import tornado.gen
+import tornado.web
+import tornado.httpclient
 
-from models.novelbase import NovelBase
+from controllers.basehandler import BaseHandler
+from models.novelmodel import NovelModel
 import utils
 from utils import json_success, json_failed, cache_error
 import const
+from settings import BASEURL
 
-class Novel(RequestHandler):
-    novel = NovelBase()
+class Novel(BaseHandler):
+    novel = NovelModel()
     
     def get(self):
         return self.post()
@@ -104,15 +108,11 @@ class GetNovelContent(Novel):
             if c.__len__() != 1:
                 raise ValueError(500)
             else:
-                result = {
-                        'title': c[0]['title'], 
-                        'subtitle': c[0]['subtitle'], 
-                        'novelid': c[0]['novelid'], 
-                        'content': c[0]['text'], 
-                        'chapterid': c[0]['id'],
-                        }
+                result = {'title': c[0]['title'], 'subtitle': c[0]['subtitle'], 'novelid': c[0]['novelid'],
+                          'content': c[0]['text'], 'chapterid': c[0]['id'],
+                          'prev': self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))[0],
+                          'next': self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))[1]}
                 #获取上一章节和下一章节
-                result['prev'], result['next'] = self.novel.loadPrevNext(int(c[0]['chapter']), int(c[0]['novelid']))
                 self.write(json_success(result))
 
 class NovelClick(Novel):
@@ -154,3 +154,23 @@ class GetNovelRank(Novel):
             'picture': v['picture'],
             'rank': (page-1)*limit + i} for i, v in enumerate(novel_list, 1)]
         self.write(json_success(result)) 
+
+class NovelSearch(Novel):
+    """获取小说的搜索结果"""
+
+    def initialize(self):
+        super(NovelSearch, self).initialize()
+        self.uri = BASEURL + "/search/"
+        self.method = "POST"
+        self.headers = self.request.headers
+        self.body = None
+
+    @cache_error
+    @utils.checkSign
+    @tornado.gen.coroutine
+    def post(self):
+        wd = self.get_argument("wd", None)
+        if not wd:
+            raise ValueError(401)
+        #拼装body
+        self.body = urllib.urlencode({"text": wd})

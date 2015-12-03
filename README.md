@@ -49,10 +49,10 @@
 <tr><td>appid</td><td>应用ID</td><td>您自己的appid</td></tr>
 <tr><td>sign_method</td><td>签名方式</td><td>目前支持MD5</td></tr>
 <tr><td>sign</td><td>签名</td><td>MD5加密后结果</td></tr>
-<tr><td>text</td><td>搜索内容</td><td>搜索内容</td></tr>
+<tr><td>text</td><td>搜索内容</td><td>搜索内容, 最大长度:65535</td></tr>
 <tr><td>docid</td><td>文档id</td><td>文档id, 用于搜索时返回</td></tr>
 <tr><td>docids</td><td>文档id范围</td><td>如: 1-1000, 搜索引擎会在id范围内进行搜索, <em>注</em>: docids的最大取值范围为1 ~ 999999999999</td></tr>
-<tr><td>tags</td><td>标签</td><td>如: 搜索-引擎 被打上此标签的搜索内容</td></tr>
+<tr><td>tags</td><td>标签</td><td>如: 搜索-引擎 被打上此标签的搜索内容, 最大长度:65535</td></tr>
 <tr><td>timeout</td><td>超时时间</td><td>如果搜索超时,也会有部分内容返回</td></tr>
 </tbody>
 </table>
@@ -144,6 +144,7 @@ text（分词）/ pos（词性）
 <tr><td>second</td><td>二级分类，按小说内容</td><td>无</td></tr>
 <tr><td>novelid</td><td>小说ID</td><td>无</td></tr>
 <tr><td>chapterid</td><td>章节ID</td><td>无</td></tr>
+<tr><td>wd</td><td>搜索关键词</td><td>无</td></tr>
 </tbody>
 </table>
 ###获取小说分类接口
@@ -206,6 +207,16 @@ first / second
     page / limit
 ####返回字段
     novelid / title / novelpv / picture / author / first / second / rank(排名)
+    
+###小说搜索
+####接口地址
+    /novelsearch/
+####接口描述
+    获取小说搜索结果
+####参数
+    wd
+####返回字段
+    novelid / title / novelpv / picture / author / first / second / rank / introduction
     
 ##用户认证接口
 ###参数列表

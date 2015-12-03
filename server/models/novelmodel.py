@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from base import Base
+from basemodel import BaseModel
 
 
-class NovelBase(Base):
+class NovelModel(BaseModel):
     """novel model基础类"""
     def __init__(self):
-        super(NovelBase, self).__init__()
+        super(NovelModel, self).__init__()
 
 
     def loadAllTag(self):

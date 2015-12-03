@@ -2,14 +2,14 @@
 
 import time
 
-from base import Base
+from basemodel import BaseModel
 
 #docids的范围 1-999999999999
 DOCIDSIZE = 1000000000000
 
-class SearchBase(Base):
+class SearchModel(BaseModel):
     def __init__(self):
-        super(SearchBase, self).__init__()
+        super(SearchModel, self).__init__()
 
     def loadDocids(self, appid, docids):
         """
