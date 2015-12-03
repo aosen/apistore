@@ -184,12 +184,13 @@ class NovelSearch(Novel):
         sign = utils.md5sign(appsecret, data)
         data["sign"] = sign
         self.body = urllib.urlencode(data)
-        print self.uri
-        print self.body
         resp = yield self.client()
-        jsonret = json.loads(resp.body)
-        if jsonret["code"] == 200:
-            novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
-            self.write(json_success(novellist))
-        else:
-            raise ValueError(500)
+        try:
+            jsonret = json.loads(resp.body)
+            if jsonret["code"] == 200:
+                novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
+                self.write(json_success(novellist))
+            else:
+                self.write(json_failed(int(jsonret["code"])))
+        except Exception as e:
+            self.write(json_failed(500))
