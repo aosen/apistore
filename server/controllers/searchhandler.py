@@ -104,8 +104,8 @@ class SearchAction(Search):
 
     def initialize(self):
         super(SearchAction, self).initialize()
-        self.uri = searchserver+"search/?"
-        self.body = self.request.body
+        self.uri = searchserver+"search/"
+        self.body = None
         self.headers = self.request.headers
 
     @tornado.gen.coroutine
@@ -128,13 +128,15 @@ class SearchAction(Search):
         else:
             docidslist[0] = str(utils.encodeDocid(int(self.appid), int(docidslist[0])))
             docidslist[1] = str(utils.encodeDocid(int(self.appid), int(docidslist[1])))
-        self.uri = self.uri + "docids=" + docidslist[0] + "-" + docidslist[1]
+        data = {}
+        data["docids"] = docidslist[0] + "-" + docidslist[1]
         if self.text:
-            self.uri = self.uri + "&text=" + self.text
+            data["text"] = self.text
         if self.tags:
-            self.uri = self.uri + "&tags=" + self.tags
+            data["tags"] = self.tags
         if self.timeout:
-            self.uri = self.uri + "&timeout=" + self.timeout
+            data["timeout"] = self.timeout
+        self.body = urllib.urlencode(data)
         resp = yield self.client()
         raise tornado.gen.Return(resp)
 

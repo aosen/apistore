@@ -216,7 +216,7 @@ first / second
 ####参数
     wd
 ####返回字段
-    novelid / title / novelpv / picture / author / first / second / rank / introduction
+    id(即novelid) / title / novelpv / picture / author / first / second / introduction
     
 ##用户认证接口
 ###参数列表

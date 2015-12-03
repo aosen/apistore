@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from basemodel import BaseModel
+import utils
 
 
 class NovelModel(BaseModel):
@@ -84,3 +85,24 @@ class NovelModel(BaseModel):
         sql = "SELECT * FROM novelrank LIMIT %s,%s"
         return self.db.query(sql, (page-1)*limit, limit)
 
+    def getNovelDocMaxId(self, appid):
+        """获取小说最大id"""
+        sql = "SELECT maxdocid FROM doc WHERE appid_id=%s"
+        docmaxid = self.db.get(sql,appid)["maxdocid"]
+        return utils.decodeDocid(appid, docmaxid)
+
+    def getNovelListById(self, novelidlist):
+        """根据小说id列表加载小说详情列表"""
+        """
+        SQL: select * from table where id IN (3,6,9,1,2,5,8,7);
+        这样的情况取出来后，其实，id还是按1,2,3,4,5,6,7,8,9,排序的，但如果我们真要按IN里面的顺序排序怎么办？
+        SQL能不能完成？是否需要取回来后再foreach一下？其实mysql就有这个方法
+        sql: select * from table where id IN (3,6,9,1,2,5,8,7) order by field(id,3,6,9,1,2,5,8,7);
+        出来的顺序就是指定的顺序了。
+        """
+        l = ", ".join([str(id) for id in novelidlist])
+        sql = """
+        SELECT id, title, first, second, author, introduction, picture, novelpv FROM novel WHERE
+        id IN (%s) ORDER BY FIELD (id, %s);
+        """ % (l, l)
+        return self.db.query(sql)

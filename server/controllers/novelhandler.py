@@ -2,6 +2,7 @@
 
 import json
 import datetime
+import urllib
 
 import tornado.gen
 import tornado.web
@@ -12,7 +13,7 @@ from models.novelmodel import NovelModel
 import utils
 from utils import json_success, json_failed, cache_error
 import const
-from settings import BASEURL
+from settings import BASEURL, appsecret
 
 class Novel(BaseHandler):
     novel = NovelModel()
@@ -170,7 +171,25 @@ class NovelSearch(Novel):
     @tornado.gen.coroutine
     def post(self):
         wd = self.get_argument("wd", None)
+        sign_method = self.get_argument("sign_method", None)
         if not wd:
             raise ValueError(401)
         #拼装body
-        self.body = urllib.urlencode({"text": wd})
+        data = {
+            "appid": self.appid,
+            "sign_method": sign_method,
+            "text": wd,
+            "docids": "0-" + str(self.novel.getNovelDocMaxId(self.appid)),
+        }
+        sign = utils.md5sign(appsecret, data)
+        data["sign"] = sign
+        self.body = urllib.urlencode(data)
+        print self.uri
+        print self.body
+        resp = yield self.client()
+        jsonret = json.loads(resp.body)
+        if jsonret["code"] == 200:
+            novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
+            self.write(json_success(novellist))
+        else:
+            self.write(resp.body)

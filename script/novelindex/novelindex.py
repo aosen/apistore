@@ -176,12 +176,11 @@ if __name__ == "__main__":
     for second in secondlist:
         tagdict[second["id"]] = second["second"]
     #生成20个线程
-    clientNum = 50
+    clientNum = 100
     clientPoll = RpcClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
     for data in datalist:
-        text = data["title"] + data["introduction"]
-        tags = tagdict[data["second"]] + "-" + data["author"]
+        text = data["title"] + data["introduction"] + tagdict[data["second"]] + data["author"]
         docid = data["id"]
-        thread = gevent.spawn(clientPoll.client().index, text, docid, tags)
+        thread = gevent.spawn(clientPoll.client().index, text, docid, None)
         thread.join()

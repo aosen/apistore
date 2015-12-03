@@ -106,6 +106,14 @@ def checkSign(func):
 
     return wrapper
 
+def md5sign(appsecret, dict):
+    """生成签名"""
+    #字典排序
+    dictsort = sorted(dict.iteritems(), key = lambda asd:asd[0])
+    #字符串拼装
+    sortstr = "".join([str(v) for value in dictsort for v in value])
+    return hashlib.md5(appsecret + sortstr + appsecret).hexdigest()
+
 
 def encodeDocid(appid, docid):
     """
@@ -123,7 +131,7 @@ def decodeDocid(appid, docid):
     :param docid:
     :return: new_docid
     """
-    return docid - appid * MAX_DOCID
+    return docid - int(appid) * MAX_DOCID
 
 def encodePassword(password):
     """
