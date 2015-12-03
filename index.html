@@ -151,7 +151,7 @@
 <tr>
 <td>text</td>
 <td>搜索内容</td>
-<td>搜索内容</td>
+<td>搜索内容, 最大长度:65535</td>
 </tr>
 <tr>
 <td>docid</td>
@@ -166,7 +166,7 @@
 <tr>
 <td>tags</td>
 <td>标签</td>
-<td>如: 搜索-引擎 被打上此标签的搜索内容</td>
+<td>如: 搜索-引擎 被打上此标签的搜索内容, 最大长度:65535</td>
 </tr>
 <tr>
 <td>timeout</td>
@@ -457,6 +457,11 @@
 <td>章节ID</td>
 <td>无</td>
 </tr>
+<tr>
+<td>wd</td>
+<td>搜索关键词</td>
+<td>无</td>
+</tr>
 </tbody>
 </table>
 
@@ -619,6 +624,33 @@
 <pre><code>novelid / title / novelpv / picture / author / first / second / rank(排名)
 </code></pre>
 
+<h3>
+<a id="小说搜索" class="anchor" href="#%E5%B0%8F%E8%AF%B4%E6%90%9C%E7%B4%A2" aria-hidden="true"><span class="octicon octicon-link"></span></a>小说搜索</h3>
+
+<h4>
+<a id="接口地址-12" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+
+<pre><code>/novelsearch/
+</code></pre>
+
+<h4>
+<a id="接口描述-2" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
+
+<pre><code>获取小说搜索结果
+</code></pre>
+
+<h4>
+<a id="参数-10" class="anchor" href="#%E5%8F%82%E6%95%B0-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+
+<pre><code>wd
+</code></pre>
+
+<h4>
+<a id="返回字段-10" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+
+<pre><code>id(即novelid) / title / novelpv / picture / author / first / second / introduction
+</code></pre>
+
 <h2>
 <a id="用户认证接口" class="anchor" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>用户认证接口</h2>
 
@@ -664,25 +696,25 @@
 <a id="用户注册" class="anchor" href="#%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>用户注册</h3>
 
 <h4>
-<a id="接口地址-12" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+<a id="接口地址-13" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
 
 <pre><code>/register/
 </code></pre>
 
 <h4>
-<a id="接口描述-2" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
+<a id="接口描述-3" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
 
 <pre><code>用于开发者的用户注册
 </code></pre>
 
 <h4>
-<a id="参数-10" class="anchor" href="#%E5%8F%82%E6%95%B0-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+<a id="参数-11" class="anchor" href="#%E5%8F%82%E6%95%B0-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
 
 <pre><code>username / password
 </code></pre>
 
 <h4>
-<a id="返回字段-10" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+<a id="返回字段-11" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
 
 <pre><code>如果成功 code: 200 失败 code为相应错误码
 </code></pre>
