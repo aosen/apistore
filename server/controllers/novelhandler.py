@@ -192,4 +192,4 @@ class NovelSearch(Novel):
             novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
             self.write(json_success(novellist))
         else:
-            self.write(resp.body)
+            raise ValueError(500)
