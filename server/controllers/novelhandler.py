@@ -16,7 +16,10 @@ import const
 from settings import BASEURL, appsecret
 
 class Novel(BaseHandler):
-    novel = NovelModel()
+
+    def initialize(self):
+        super(Novel, self).initialize()
+        self.novel = NovelModel()
     
     def get(self):
         return self.post()

@@ -46,6 +46,7 @@ pip install redis
 pip install tornado-redis
 yum install redis
 pip install pandas
+pip install DBUtils
 ```
 
 ##Golang源码

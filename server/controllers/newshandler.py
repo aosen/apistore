@@ -13,7 +13,10 @@ from models.newsmodel import NewsModel
 
 class news(RequestHandler):
     """news的基类"""
-    news = NewsModel()
+
+    def initialize(self):
+        super(news, self).initialize()
+        self.news = NewsModel()
 
 class GetSinaGirl(news):
     """获取新浪女孩的列表"""
