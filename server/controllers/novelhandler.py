@@ -91,7 +91,7 @@ class GetNovelChapter(Novel):
     def post(self):
         novelid = self.get_argument("novelid", None)
         if not novelid:
-            raise ValueError(1)
+            raise ValueError(401)
         else:
             chapter_list = self.novel.loadNovelChapter(int(novelid))
             result = [{'subtitle': v['subtitle'], 'chapter': i, 'chapterid': v['id']} for i, v in enumerate(chapter_list, 1)]
