@@ -18,7 +18,7 @@ if __name__ == "__main__":
             passwd=DATABASES['PASSWORD'], 
             db=DATABASES['NAME'],
             charset="utf8")
-    sql = "SELECT id, title, first, second, author, picture, novelpv FROM novel"
+    sql = "SELECT id, title, introduction, first, second, author, picture, novelpv FROM novel"
     df = pd.read_sql(sql, con=mysql_cn)
     df = df.sort_values(by='novelpv', ascending=False)
     df.rename(columns={'id': 'novelid'}, inplace=True)

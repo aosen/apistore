@@ -150,7 +150,8 @@ class GetNovelRank(Novel):
         novel_list = self.novel.loadNovelRank(page, limit)
         result = [{
             'novelid': v['novelid'], 
-            'title': v['title'], 
+            'title': v['title'],
+            'introduction': v['introduction'],
             'novelpv': v['novelpv'], 
             'author': v['author'], 
             'first': v['first'], 
