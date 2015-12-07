@@ -4,7 +4,7 @@
 import torndb
 import Queue
 
-from settings import DATABASES
+from settings import DATABASES, logger
 
 class PoolDB(object):
     """数据库连接池"""
@@ -31,7 +31,7 @@ class PoolDB(object):
                                        max_idle_time=max_idle_time, connect_timeout=connect_timeout,
                                        time_zone=time_zone,charset = charset, sql_mode=sql_mode)
         conn = cls.pooldb.get()
-        #失败重连
+        logger.info(str(conn._db))
         if conn._db == None:
             conn.reconnect()
         return conn
