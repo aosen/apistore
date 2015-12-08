@@ -5,8 +5,8 @@
 参数配置文件
 """
 
-baseurl = 'http://10.0.16.185:8000'
-#baseurl = 'http://api.9miao.com'
+baseurl = 'http://127.0.0.1:8000'
+#baseurl = 'http://42.62.6.158:8000'
 """
 testurl = [
     {

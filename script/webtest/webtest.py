@@ -143,7 +143,7 @@ if __name__ == "__main__":
             dict['sign_method'] = "md5"
             dict['sign'] = md5sign(appsecret, dict)
             thread = gevent.spawn(clientPoll.client().post, url, dict)
-            thread.join()
+            thread.join(1)
             i += 1
     t2 = time.time()
     logger.info("time: " + str(t2-t1))
