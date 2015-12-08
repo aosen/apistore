@@ -4,12 +4,16 @@
 """
 参数配置文件
 """
+
+baseurl = 'http://127.0.0.1:8000'
+#baseurl = 'http://api.9miao.com'
+
 testurl = [
     {
         'url': '/search/',
         'body': {
             'text': '测试',
-            'docids': '0-1000',
+            'docids': '99999999998-99999999999',
         }
     },
     {
@@ -23,7 +27,7 @@ testurl = [
         'url': '/cut/',
         'body': {
             'text': '测试测试',
-            'mode': '1',
+            'mode': 1,
         }
     },
     {

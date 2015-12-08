@@ -13,6 +13,7 @@ import json
 import Queue
 import signal
 import copy
+import time
 
 import gevent
 
@@ -24,7 +25,7 @@ from settings import DATABASES, logger, appid, appsecret, BASEURL
 
 import torndb
 
-from const import testurl
+from const import testurl, baseurl
 
 errcode = {
     401: "参数不正确",
@@ -43,7 +44,7 @@ def initLog(level):
     """初始化日志"""
     logger.setLevel(level)
     # 创建一个handler，用于写入日志文件
-    fh = logging.FileHandler('novelindex.log')
+    fh = logging.FileHandler('webtest.log')
     fh.setLevel(level)
     # 再创建一个handler，用于输出到控制台
     ch = logging.StreamHandler()
@@ -121,25 +122,29 @@ class Client(object):
         self.manage.close(self)
 
 if __name__ == "__main__":
-    baseurl = 'http://api.9miao.com'
     #初始化日志
     initLog(logging.DEBUG)
     #生成500个线程
-    clientNum = 1000
+    clientNum = 100
     clientPoll = ClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
     i = 0
     l = len(testurl)
-    for _ in testurl:
-    #while True:
-        url = baseurl + testurl[i%l]['url']
-        if testurl[i%l].has_key('body'):
-            dict = copy.deepcopy(testurl[i%l]['body'])
-        else:
-            dict = {}
-        dict['appid'] = appid
-        dict['sign_method'] = "md5"
-        dict['sign'] = md5sign(appsecret, dict)
-        thread = gevent.spawn(clientPoll.client().post, url, dict)
-        thread.join()
-        i += 1
+    t1 = time.time()
+    for _ in range(1):
+        for _ in testurl:
+        #while True:
+            url = baseurl + testurl[i%l]['url']
+            if testurl[i%l].has_key('body'):
+                dict = copy.deepcopy(testurl[i%l]['body'])
+            else:
+                dict = {}
+            dict['appid'] = appid
+            dict['sign_method'] = "md5"
+            dict['sign'] = md5sign(appsecret, dict)
+            print dict['sign']
+            thread = gevent.spawn(clientPoll.client().post, url, dict)
+            thread.join()
+            i += 1
+    t2 = time.time()
+    logger.info("time: " + str(t2-t1))

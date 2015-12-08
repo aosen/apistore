@@ -81,8 +81,6 @@ class GetNews(news):
         page = 1 if not page else int(page)
         limit = self.get_argument("limit", None)
         limit = const.NEWS_LIMIT if not limit else int(limit)
-        print page, limit, tag
-        news_list = self.news.loadNews(tag, page, limit) 
-        print news_list
+        news_list = self.news.loadNews(tag, page, limit)
         result = [{'title': v['title'], 'image': v['image'], 'desc': v['intro'], 'url': v['url'], 'create_time': v['createtime']} for v in news_list]
         self.write(utils.json_success(result))

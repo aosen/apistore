@@ -1,35 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import json
-
 import tornado.gen
 import tornado.web
 import tornado.httpclient
+import urllib
 
 import utils
 
-from settings import BASEURL
+from basehandler import BaseHandler
+from settings import BASEURL, searchserver
 
-class Cut(tornado.web.RequestHandler):
+class Cut(BaseHandler):
     def initialize(self):
         super(Cut, self).initialize()
-        self.uri = BASEURL + "/cut/"
-        self.body = self.request.body
+        self.method = self.request.method
+        self.uri = searchserver + "cut/"
+        self.body = None
         self.headers = self.request.headers
 
     @tornado.gen.coroutine
     def getCutFromGolang(self, text, mode):
-        if text and mode:
-            self.uri = self.uri+"?text="+text+"&mode="+mode
-        req = tornado.httpclient.HTTPRequest(
-                self.uri, 
-                method=self.request.method, 
-                body=self.body, 
-                headers=self.headers, 
-                follow_redirects=False, 
-                allow_nonstandard_methods=True)
-        client = tornado.httpclient.AsyncHTTPClient()
-        resp = yield client.fetch(req)
+        dict = {"text": text, "mode": mode}
+        self.body = urllib.urlencode(dict)
+        resp = yield self.client()
         raise tornado.gen.Return(resp)
 
     def get(self):
@@ -41,7 +34,12 @@ class Cut(tornado.web.RequestHandler):
     def post(self):
         text = self.get_argument("text", None)
         mode = self.get_argument("mode", None)
+        if not text or not mode:
+            self.write(utils.json_failed(401))
         response = yield self.getCutFromGolang(text, mode)
-        self.write(response.body) 
+        self.write(response.body)
+        print self.method
+        print self.body
+        print response.body
         self.finish()
 
