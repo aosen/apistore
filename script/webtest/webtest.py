@@ -131,7 +131,8 @@ if __name__ == "__main__":
     i = 0
     l = len(testurl)
     t1 = time.time()
-    for _ in range(1):
+    threads = []
+    for _ in range(10):
         for _ in testurl:
         #while True:
             url = baseurl + testurl[i%l]['url']
@@ -142,9 +143,9 @@ if __name__ == "__main__":
             dict['appid'] = appid
             dict['sign_method'] = "md5"
             dict['sign'] = md5sign(appsecret, dict)
-            print dict['sign']
             thread = gevent.spawn(clientPoll.client().post, url, dict)
-            thread.join()
+            threads.append(thread)
             i += 1
+    gevent.joinall(threads)
     t2 = time.time()
     logger.info("time: " + str(t2-t1))
