@@ -118,7 +118,7 @@ class Client(object):
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
         response = opener.open(req, body)
         r = response.read()
-        logger.info(url + " code:" + str(json.loads(r)['code']))
+        logger.info(url+"?"+ body + " code:" + str(json.loads(r)['code']))
         self.manage.close(self)
 
 if __name__ == "__main__":
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     i = 0
     l = len(testurl)
     t1 = time.time()
-    for _ in range(10):
+    for _ in range(100):
         for _ in testurl:
         #while True:
             url = baseurl + testurl[i%l]['url']
