@@ -12,6 +12,7 @@ from settings import BASEURL
 
 class Cut(tornado.web.RequestHandler):
     def initialize(self):
+        super(Cut, self).initialize()
         self.uri = BASEURL + "/cut/"
         self.body = self.request.body
         self.headers = self.request.headers

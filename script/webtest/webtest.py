@@ -2,7 +2,7 @@
 #!/usr/bin/python
 
 """
-小说内容索引脚本,基于gevent
+网站测试脚本
 """
 
 import urllib2
@@ -24,44 +24,7 @@ from settings import DATABASES, logger, appid, appsecret, BASEURL
 
 import torndb
 
-testurl = [
-    {
-        'url': '/search/',
-        'body': {
-            'text': '测试',
-            'docids': '0-1000',
-        }
-    },
-    {
-        'url': '/index/',
-        'body': {
-            'text': '测试',
-            'docid': '99999999999',
-        }
-    },
-    {
-        'url': '/cut/',
-        'body': {
-            'text': '测试测试',
-            'mode': '1',
-        }
-    },
-    {
-        'url': '/novelcontent/',
-        'body': {
-            'chapterid': 100,
-        }
-    },
-    {
-        'url': '/taglist/',
-    },
-    {
-        'url': '/novellist/',
-        'body': {
-
-        }
-    }
-]
+from const import testurl
 
 errcode = {
     401: "参数不正确",
