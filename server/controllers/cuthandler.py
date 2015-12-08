@@ -8,9 +8,11 @@ import tornado.httpclient
 
 import utils
 
+from settings import BASEURL
+
 class Cut(tornado.web.RequestHandler):
     def initialize(self):
-        self.uri = "http://127.0.0.1:2019/cut/"
+        self.uri = BASEURL + "/cut/"
         self.body = self.request.body
         self.headers = self.request.headers
 
