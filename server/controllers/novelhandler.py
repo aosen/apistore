@@ -192,8 +192,11 @@ class NovelSearch(Novel):
         try:
             jsonret = json.loads(resp.body)
             if jsonret["code"] == 200:
-                novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
-                self.write(json_success(novellist))
+                if len(jsonret["result"]["docs"]) != 0:
+                    novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
+                    self.write(json_success(novellist))
+                else:
+                    self.write(json_success([]))
             else:
                 self.write(json_failed(int(jsonret["code"])))
         except Exception as e:

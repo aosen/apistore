@@ -7,16 +7,33 @@
 
 baseurl = 'http://127.0.0.1:8000'
 #baseurl = 'http://api.9miao.com'
-case = 0
+case = 2
+loop=1
 
 #比较慢的url: new,
 
 switch = {
+    2: [
+        {
+            'url': '/index/',
+            'body': {
+                'text': 'hello world',
+                'docid': '1',
+            }
+        },
+        {
+            'url': '/search/',
+            'body': {
+                'text': 'hello',
+                'docids': '0-999',
+                }
+        }
+    ],
         1: [{
             'url': '/novelsearch/',
             'body': {
-                'wd':'雁归来',
-        }
+                'wd':'word',
+            }
         }],
         0:[
         {
@@ -65,10 +82,10 @@ switch = {
                 'second': '100',
                 }
             },
-        {
+            {
             'url': '/novelsearch/',
             'body': {
-                'wd': '小小'
+                'wd': '晴天娃娃会下雨'
                 },
             },
             {

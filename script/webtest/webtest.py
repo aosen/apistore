@@ -22,10 +22,9 @@ sys.path.append("../")
 reload(sys)
 sys.setdefaultencoding('utf8')
 from settings import DATABASES, logger, appid, appsecret, BASEURL
-
 import torndb
 
-from const import testurl, baseurl
+from const import testurl, baseurl, loop
 
 errcode = {
     401: "参数不正确",
@@ -130,7 +129,6 @@ if __name__ == "__main__":
     clientNum = 100
     clientPoll = ClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
-    loop = 1
     i = 0
     l = len(testurl)
     timedict = {}
