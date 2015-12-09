@@ -79,7 +79,13 @@ class GetNovelIntroduction(Novel):
             if intro.__len__() != 1:
                 raise ValueError(500)
             else:
-                result = {'title': intro[0]['title'], 'novelid': intro[0]['id'], 'author': intro[0]['author'], 'picture': "/static/spider/"+intro[0]['picture'], 'introduction': intro[0]['introduction']}
+                result = {
+                    'title': intro[0]['title'],
+                    'novelid': intro[0]['id'],
+                    'author': intro[0]['author'],
+                    'picture': "/static/spider/"+intro[0]['picture'],
+                    'introduction': intro[0]['introduction'].strip(),
+                }
             self.write(json_success(result))
 
 
@@ -189,12 +195,23 @@ class NovelSearch(Novel):
         data["sign"] = sign
         self.body = urllib.urlencode(data)
         resp = yield self.client()
+        result = []
         try:
             jsonret = json.loads(resp.body)
             if jsonret["code"] == 200:
                 if len(jsonret["result"]["docs"]) != 0:
                     novellist = self.novel.getNovelListById(jsonret["result"]["docs"])
-                    self.write(json_success(novellist))
+                    for v in novellist:
+                        result.append({
+                            'id': v['id'],
+                            'picture': v['picture'],
+                            'introduction': v['introduction'].strip(),
+                            'title': v['title'],
+                            'first': v['first'],
+                            'second': v['second'],
+                            'novelv': v['novelpv'],
+                        })
+                    self.write(json_success(result))
                 else:
                     self.write(json_success([]))
             else:

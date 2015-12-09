@@ -7,7 +7,7 @@
 
 baseurl = 'http://127.0.0.1:8000'
 #baseurl = 'http://api.9miao.com'
-case = 2
+case = 0
 loop=1
 
 #比较慢的url: new,
@@ -75,6 +75,12 @@ switch = {
         {
             'url': '/taglist/',
             },
+            {
+                'url': '/novelintroduction/',
+                'body': {
+                            'novelid': 10,
+                        },
+            },
         {
             'url': '/novellist/',
             'body': {
@@ -90,7 +96,7 @@ switch = {
             },
             {
                 'url': '/novelrank/',
-            }
+            },
         ]
     }
 
