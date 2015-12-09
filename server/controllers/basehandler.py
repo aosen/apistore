@@ -15,6 +15,8 @@ class BaseHandler(tornado.web.RequestHandler):
 
     @tornado.gen.coroutine
     def client(self):
+        print self.uri
+        print self.body
         req = tornado.httpclient.HTTPRequest(
             self.uri,
             method=self.method,

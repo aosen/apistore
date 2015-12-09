@@ -28,19 +28,6 @@ class Search(BaseHandler):
     def initialize(self):
         self.fd = SearchModel()
 
-    @tornado.gen.coroutine
-    def client(self):
-        req = tornado.httpclient.HTTPRequest(
-            self.uri,
-            method=self.request.method,
-            body=self.body,
-            headers=self.headers,
-            follow_redirects=False,
-            allow_nonstandard_methods=True)
-        client = tornado.httpclient.AsyncHTTPClient()
-        resp = yield client.fetch(req)
-        raise tornado.gen.Return(resp)
-
     def get(self):
         return self.post()
 
@@ -48,6 +35,7 @@ class Search(BaseHandler):
 class IndexAction(Search):
     def initialize(self):
         super(IndexAction, self).initialize()
+        self.method = self.request.method
         self.uri = searchserver+"index/"
         self.body = self.request.body
         self.headers = self.request.headers
@@ -104,6 +92,7 @@ class SearchAction(Search):
 
     def initialize(self):
         super(SearchAction, self).initialize()
+        self.method = self.request.method
         self.uri = searchserver+"search/"
         self.body = None
         self.headers = self.request.headers

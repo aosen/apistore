@@ -239,3 +239,6 @@ first / second
     username / password
 ####返回字段
     如果成功 code: 200 失败 code为相应错误码
+    
+##开发计划
+2015-12-9 增加redis缓存

@@ -151,7 +151,7 @@ class GetNovelRank(Novel):
         result = [{
             'novelid': v['novelid'], 
             'title': v['title'],
-            'introduction': v['introduction'],
+            'introduction': v['introduction'].strip(),
             'novelpv': v['novelpv'], 
             'author': v['author'], 
             'first': v['first'], 

@@ -115,10 +115,12 @@ class Client(object):
         req = urllib2.Request(url)
         body = urllib.urlencode(body)
         #enable cookie
+        t1 = time.time()
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
         response = opener.open(req, body)
         r = response.read()
-        logger.info(url+"?"+ body + " code:" + str(json.loads(r)['code']))
+        t2 = time.time()
+        logger.info("time:" + str(t2-t1) + " " +url+"?"+ body + " code:" + str(json.loads(r)['code']))
         self.manage.close(self)
 
 if __name__ == "__main__":
@@ -128,12 +130,16 @@ if __name__ == "__main__":
     clientNum = 100
     clientPoll = ClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
+    loop = 1
     i = 0
     l = len(testurl)
-    t1 = time.time()
-    for _ in range(100):
-        for _ in testurl:
+    timedict = {}
+    for item in testurl:
+        timedict[item['url']] = []
+    for _ in range(loop):
+        for item in testurl:
         #while True:
+            t1 = time.time()
             url = baseurl + testurl[i%l]['url']
             if testurl[i%l].has_key('body'):
                 dict = copy.deepcopy(testurl[i%l]['body'])
@@ -145,5 +151,9 @@ if __name__ == "__main__":
             thread = gevent.spawn(clientPoll.client().post, url, dict)
             thread.join(1)
             i += 1
-    t2 = time.time()
-    logger.info("time: " + str(t2-t1))
+            t2 = time.time()
+            timedict[item['url']].append(t2-t1)
+    average = {}
+    for k, v in timedict.items():
+        average[k] = sum(v) / loop
+    print average
