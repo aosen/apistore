@@ -75,7 +75,6 @@ class GetNovelIntroduction(Novel):
             raise ValueError(1)
         else:
             intro = self.novel.loadNovelIntroduction(int(novelid))
-            print intro.__len__()
             if intro.__len__() != 1:
                 raise ValueError(500)
             else:
@@ -84,7 +83,7 @@ class GetNovelIntroduction(Novel):
                     'novelid': intro[0]['id'],
                     'author': intro[0]['author'],
                     'picture': "/static/spider/"+intro[0]['picture'],
-                    'introduction': intro[0]['introduction'].strip(),
+                    'introduction': "".join(intro[0]['introduction'].split()),
                 }
             self.write(json_success(result))
 
@@ -157,7 +156,7 @@ class GetNovelRank(Novel):
         result = [{
             'novelid': v['novelid'], 
             'title': v['title'],
-            'introduction': v['introduction'].strip(),
+            'introduction': "".join(v['introduction'].split()),
             'novelpv': v['novelpv'], 
             'author': v['author'], 
             'first': v['first'], 
@@ -205,7 +204,7 @@ class NovelSearch(Novel):
                         result.append({
                             'id': v['id'],
                             'picture': v['picture'],
-                            'introduction': v['introduction'].strip(),
+                            'introduction': "".join(v['introduction'].split()),
                             'title': v['title'],
                             'first': v['first'],
                             'second': v['second'],
