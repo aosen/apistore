@@ -60,7 +60,12 @@ class GetNovelList(Novel):
             raise ValueError(1)
         else:
             novel_list = self.novel.loadNovelList(first, second, page, limit)
-            result = [{'novelid': v['id'], 'title': v['title'], 'novelpv': v['novelpv'], 'author': v['author'], 'introduction': v['introduction'], 'picture': "/static/spider/" + v['picture']} for v in novel_list]
+            result = [{'novelid': v['id'],
+                       'title': v['title'],
+                       'novelpv': v['novelpv'],
+                       'author': v['author'],
+                       'introduction': "".join(v['introduction'].split()),
+                       'picture': "/static/spider/" + v['picture']} for v in novel_list]
             self.write(json_success(result)) 
 
 
