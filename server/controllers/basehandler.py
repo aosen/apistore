@@ -12,10 +12,14 @@ class BaseHandler(tornado.web.RequestHandler):
         self.appid = self.get_argument("appid", None)
 
     def on_finish(self):
+
         logger.info(self.request.uri + ' ' +"请求处理完毕")
         #防止连接忘关闭
+        """
+        print self._finished
         if not self._finished:
             self.finish()
+        """
 
     @tornado.gen.coroutine
     def client(self):
