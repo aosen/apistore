@@ -4,12 +4,16 @@ import tornado.web
 import tornado.httpclient
 import tornado.gen
 
+from settings import logger
+
 class BaseHandler(tornado.web.RequestHandler):
 
     def prepare(self):
         self.appid = self.get_argument("appid", None)
 
     def on_finish(self):
+        logger.info(self.request.uri + ' ' +"请求处理完毕")
+        #防止连接忘关闭
         if not self._finished:
             self.finish()
 
