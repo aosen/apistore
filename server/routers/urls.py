@@ -44,4 +44,6 @@ urlpatterns = [
     (r"/imtoken/", GotyeToken),
 
     (r"/register/",RegisterAction),
+
+    (r"/test/", Index),
         ]
