@@ -11,4 +11,7 @@ from basehandler import BaseHandler
 
 class Index(BaseHandler):
     def get(self):
-        self.write("hello world")
+        self.write(utils.json_success("hello world"))
+
+    def post(self):
+        return self.get()

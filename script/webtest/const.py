@@ -5,14 +5,19 @@
 参数配置文件
 """
 
-#baseurl = 'http://127.0.0.1:8000'
-baseurl = 'http://api.9miao.com'
-case = 0
-loop=1
+baseurl = 'http://127.0.0.1:8000'
+#baseurl = 'http://api.9miao.com'
+case = 3
+loop=1000
 
 #比较慢的url: new,
 
 switch = {
+    3: [
+        {
+            'url': '/test/',
+        },
+    ],
     2: [
         {
             'url': '/index/',
