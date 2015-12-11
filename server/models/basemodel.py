@@ -10,11 +10,13 @@ class PoolDB(object):
     """数据库连接池"""
     #判断连接池对象
     pooldb = None
+    conn = None
 
     @staticmethod
     def _initPool(max_connect=10, addr=None, name=None, user=None, password=None, max_idle_time=7 * 3600,
                   connect_timeout=0, time_zone="+0:00", charset = "utf8", sql_mode="TRADITIONAL"):
         """初始化数据库连接池,返回池对象"""
+        """
         pooldb = Queue.Queue(maxsize = max_connect)
         for _ in range(max_connect):
             conn = torndb.Connection(addr, name, user=user, password=password, max_idle_time=max_idle_time,
@@ -22,10 +24,12 @@ class PoolDB(object):
                                      charset = charset, sql_mode=sql_mode)
             pooldb.put(conn)
         return pooldb
+        """
 
     @classmethod
     def open(cls, max_connect=10, addr=None, name=None, user=None, password=None, max_idle_time=7 * 3600,
                   connect_timeout=0, time_zone="+0:00", charset = "utf8", sql_mode="TRADITIONAL"):
+        """
         if not cls.pooldb:
             cls.pooldb = cls._initPool(max_connect=max_connect, addr=addr, name=name, user=user, password=password,
                                        max_idle_time=max_idle_time, connect_timeout=connect_timeout,
@@ -35,6 +39,13 @@ class PoolDB(object):
         if conn._db == None:
             conn.reconnect()
         return conn
+        """
+        if cls.conn is None:
+            cls.conn = torndb.Connection(addr, name, user=user, password=password, max_idle_time=max_idle_time,
+                                     connect_timeout=connect_timeout, time_zone=time_zone,
+                                     charset = charset, sql_mode=sql_mode)
+        return cls.conn
+
 
     @classmethod
     def close(cls, conn):
