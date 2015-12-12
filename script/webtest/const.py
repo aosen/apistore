@@ -5,10 +5,12 @@
 参数配置文件
 """
 
-baseurl = 'http://127.0.0.1:8000'
-#baseurl = 'http://api.9miao.com'
+import random
+
+#baseurl = 'http://127.0.0.1:8000'
+baseurl = 'http://api.9miao.com'
 case = 0
-loop=100
+loop=1000
 
 #比较慢的url: new,
 
@@ -74,7 +76,7 @@ switch = {
         {
             'url': '/novelcontent/',
             'body': {
-                'chapterid': 98,
+                'chapterid': random.randint(1, 10000),
                 }
             },
         {
@@ -83,7 +85,7 @@ switch = {
             {
                 'url': '/novelintroduction/',
                 'body': {
-                            'novelid': 10,
+                            'novelid': random.randint(1, 1000),
                         },
             },
         {
