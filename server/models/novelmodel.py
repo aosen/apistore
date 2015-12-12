@@ -57,11 +57,12 @@ class NovelModel(BaseModel):
         nex = pre = None
         #如果i超过3次，则说明已经到达末位
         i = 3
-        while i != 0:
+        while i >= 0:
             chapter_next += 1
             nex = self.db.get(sql, chapter_next, novelid)
             if nex:
                 break
+            i -= 1
         while chapter_pre != 0:
             chapter_pre -= 1
             pre = self.db.get(sql, chapter_pre, novelid)

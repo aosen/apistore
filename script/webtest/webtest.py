@@ -126,7 +126,7 @@ if __name__ == "__main__":
     #初始化日志
     initLog(logging.DEBUG)
     #生成500个线程
-    clientNum = 100
+    clientNum = 500
     clientPoll = ClientManage(clientNum)
     gevent.signal(signal.SIGQUIT, gevent.kill)
     i = 0

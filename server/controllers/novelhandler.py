@@ -119,7 +119,7 @@ class GetNovelContent(Novel):
             raise ValueError(401)
         else:
             c = self.novel.loadNovelContent(int(chapterid))
-            if c.__len__() != 1:
+            if len(c) != 1:
                 raise ValueError(500)
             else:
                 result = {'title': c[0]['title'], 'subtitle': c[0]['subtitle'], 'novelid': c[0]['novelid'],

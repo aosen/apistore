@@ -5,8 +5,8 @@
 参数配置文件
 """
 
-baseurl = 'http://127.0.0.1:8000'
-#baseurl = 'http://api.9miao.com'
+#baseurl = 'http://127.0.0.1:8000'
+baseurl = 'http://api.9miao.com'
 case = 0
 loop=100
 
@@ -74,7 +74,7 @@ switch = {
         {
             'url': '/novelcontent/',
             'body': {
-                'chapterid': 100,
+                'chapterid': 98,
                 }
             },
         {
