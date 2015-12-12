@@ -51,28 +51,15 @@ class NovelModel(BaseModel):
 
     def loadPrevNext(self, chapter, novelid):
         """根据chapterid获取上一章节的chapterid和下一章节的chapterid"""
-        p = n = 0
-        sql = "SELECT * FROM content WHERE chapter=%s AND novelid=%s"
-        chapter_next = chapter_pre = chapter
-        nex = pre = None
-        #如果i超过3次，则说明已经到达末位
-        i = 3
-        while i >= 0:
-            chapter_next += 1
-            nex = self.db.get(sql, chapter_next, novelid)
-            if nex:
-                break
-            i -= 1
-        while chapter_pre != 0:
-            chapter_pre -= 1
-            pre = self.db.get(sql, chapter_pre, novelid)
-            if pre:
-                break
-
+        sqlpre = "SELECT * FROM content WHERE  novelid=%s and chapter > %s limit 1;"
+        sqlnext = "SELECT * FROM content WHERE  novelid=%s and chapter < %s limit 1;"
+        p = n = None
+        pre = self.db.get(sqlpre, novelid, chapter)
+        next = self.db.get(sqlnext, novelid, chapter)
         if pre:
-            p = pre['id']
-        if nex:
-            n = nex['id']
+            p = pre[id]
+        if next:
+            n = pre[id]
         return p, n
 
 
