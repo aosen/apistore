@@ -237,4 +237,4 @@ class NovelDownload(Novel):
         if not novelid:
             raise ValueError(401)
         md5novelid = hashlib.md5(novelid).hexdigest()
-        self.write(json_success(BASEURL + "/static/novel/" + md5novelid + ".txt"))
+        self.write(json_success({"novelsrc": BASEURL + "/static/novel/" + md5novelid + ".txt"}))
