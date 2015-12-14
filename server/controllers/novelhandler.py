@@ -3,6 +3,7 @@
 import json
 import datetime
 import urllib
+import hashlib
 
 import tornado.gen
 import tornado.web
@@ -222,3 +223,18 @@ class NovelSearch(Novel):
                 self.write(json_failed(int(jsonret["code"])))
         except Exception as e:
             self.write(json_failed(500))
+
+class NovelDownload(Novel):
+    """小说下载地址"""
+    def initialize(self):
+        super(NovelDownload, self).initialize()
+
+    @cache_error
+    @utils.checkSign
+    def post(self):
+        novelid = self.get_argument("novelid", None)
+        print novelid
+        if not novelid:
+            raise ValueError(401)
+        md5novelid = hashlib.md5(novelid).hexdigest()
+        self.write(json_success(BASEURL + "/static/novel/" + md5novelid + ".txt"))

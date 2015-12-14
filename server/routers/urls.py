@@ -10,6 +10,7 @@ from controllers.novelhandler import GetNovelContent
 from controllers.novelhandler import NovelClick
 from controllers.novelhandler import GetNovelRank
 from controllers.novelhandler import NovelSearch
+from controllers.novelhandler import NovelDownload
 
 from controllers.newshandler import GetSinaGirl
 from controllers.newshandler import GetNews
@@ -33,6 +34,7 @@ urlpatterns = [
     (r"/novelclick/", NovelClick),
     (r"/novelrank/", GetNovelRank),
     (r"/novelsearch/", NovelSearch),
+    (r"/noveldownload/", NovelDownload),
 
     (r"/newsgirlpic/", GetSinaGirl),
     (r"/news/", GetNews),
