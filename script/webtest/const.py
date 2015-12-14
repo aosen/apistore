@@ -10,15 +10,18 @@ import random
 #baseurl = 'http://127.0.0.1:8000'
 baseurl = 'http://api.9miao.com'
 case = 0
-loop=1000
+loop=1
 
 #比较慢的url: new,
 
 switch = {
     3: [
-        {
-            'url': '/test/',
-        },
+            {
+                'url': '/noveldownload/',
+                'body': {
+                    'novelid': '1',
+                    },
+            },
     ],
     2: [
         {
@@ -103,6 +106,12 @@ switch = {
             },
             {
                 'url': '/novelrank/',
+            },
+            {
+                'url': '/noveldownload/',
+                'body': {
+                    'novelid': '1',
+                    },
             },
         ]
     }

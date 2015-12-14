@@ -218,6 +218,16 @@ first / second
 ####返回字段
     id(即novelid) / title / novelpv / picture(在地址前加 http://api.9miao.com/static/spider/) / author / first / second / introduction
     
+###小说下载 
+####接口地址
+    /noveldownload/
+####接口描述
+    下载小说
+####参数
+    novelid
+####返回字段
+    novelsrc (小说的下载地址)
+    
 ##用户认证接口
 ###参数列表
 <table>
@@ -241,4 +251,6 @@ first / second
     如果成功 code: 200 失败 code为相应错误码
     
 ##开发计划
+2015-12-14 提供小说文件下载接口
+2015-12-14 将数据库中的小说文本转化为txt文件 done
 2015-12-9 增加redis缓存
