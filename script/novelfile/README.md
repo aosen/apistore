@@ -1,1 +1,1 @@
-将数据库中的小说内容生成文件,文件标题是novelid 与 SECRET_KEY 取hash
+Golang实现的讲数据库中小说内容转化为txt
