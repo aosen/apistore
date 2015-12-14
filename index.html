@@ -651,6 +651,33 @@
 <pre><code>id(即novelid) / title / novelpv / picture(在地址前加 http://api.9miao.com/static/spider/) / author / first / second / introduction
 </code></pre>
 
+<h3>
+<a id="小说下载" class="anchor" href="#%E5%B0%8F%E8%AF%B4%E4%B8%8B%E8%BD%BD" aria-hidden="true"><span class="octicon octicon-link"></span></a>小说下载</h3>
+
+<h4>
+<a id="接口地址-13" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+
+<pre><code>/noveldownload/
+</code></pre>
+
+<h4>
+<a id="接口描述-3" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
+
+<pre><code>下载小说
+</code></pre>
+
+<h4>
+<a id="参数-11" class="anchor" href="#%E5%8F%82%E6%95%B0-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+
+<pre><code>novelid
+</code></pre>
+
+<h4>
+<a id="返回字段-11" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+
+<pre><code>novelsrc (小说的下载地址)
+</code></pre>
+
 <h2>
 <a id="用户认证接口" class="anchor" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>用户认证接口</h2>
 
@@ -696,25 +723,25 @@
 <a id="用户注册" class="anchor" href="#%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>用户注册</h3>
 
 <h4>
-<a id="接口地址-13" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
+<a id="接口地址-14" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80-14" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口地址</h4>
 
 <pre><code>/register/
 </code></pre>
 
 <h4>
-<a id="接口描述-3" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
+<a id="接口描述-4" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>接口描述</h4>
 
 <pre><code>用于开发者的用户注册
 </code></pre>
 
 <h4>
-<a id="参数-11" class="anchor" href="#%E5%8F%82%E6%95%B0-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
+<a id="参数-12" class="anchor" href="#%E5%8F%82%E6%95%B0-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>参数</h4>
 
 <pre><code>username / password
 </code></pre>
 
 <h4>
-<a id="返回字段-11" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
+<a id="返回字段-12" class="anchor" href="#%E8%BF%94%E5%9B%9E%E5%AD%97%E6%AE%B5-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>返回字段</h4>
 
 <pre><code>如果成功 code: 200 失败 code为相应错误码
 </code></pre>
@@ -722,7 +749,9 @@
 <h2>
 <a id="开发计划" class="anchor" href="#%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92" aria-hidden="true"><span class="octicon octicon-link"></span></a>开发计划</h2>
 
-<p>2015-12-9 增加redis缓存</p>
+<p>2015-12-14 提供小说文件下载接口
+2015-12-14 将数据库中的小说文本转化为txt文件 done
+2015-12-9 增加redis缓存</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/aosen/apistore">Apistore</a> is maintained by <a href="https://github.com/aosen">aosen</a>.</span>
