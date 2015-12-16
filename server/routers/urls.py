@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import tornado.web
-
 from controllers.novelhandler import GetTagList
 from controllers.novelhandler import GetNovelList
 from controllers.novelhandler import GetNovelChapter
@@ -11,17 +10,13 @@ from controllers.novelhandler import NovelClick
 from controllers.novelhandler import GetNovelRank
 from controllers.novelhandler import NovelSearch
 from controllers.novelhandler import NovelDownload
-
 from controllers.newshandler import GetSinaGirl
 from controllers.newshandler import GetNews
-
 from controllers.cuthandler import Cut
-from controllers.searchhandler import SearchAction, IndexAction
+from controllers.searchhandler import SearchAction , IndexAction
 from controllers.indexhandler import Index
-
 from controllers.gotyehandler import GotyeToken
-
-from controllers.userauthhandler import RegisterAction
+from controllers.userauthhandler import RegisterAction , CheckUser
 
 urlpatterns = [
     (r"/", tornado.web.RedirectHandler, {"url":"https://aosen.github.io/apistore/", "permanent":False}),
@@ -46,6 +41,7 @@ urlpatterns = [
     (r"/imtoken/", GotyeToken),
 
     (r"/register/",RegisterAction),
+    (r"/checkuser/", CheckUser),
 
     (r"/test/", Index),
         ]

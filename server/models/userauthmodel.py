@@ -15,14 +15,14 @@ class UserAuthModel(BaseModel):
         检测用户是否已经存在
         :param appid:
         :param username:
-        :return: 如果存在返回True 否则返回 False
+        :return: 如果存在返回username条目 否则返回 None
         """
         sql = "SELECT username from userinfo WHERE appid_id=%s AND username=%s"
         username = self.db.get(sql, int(appid), username)
         if username:
-            return True
+            return username
         else:
-            return False
+            return None
 
     def saveUserInfo(self, appid, username, password):
         """
@@ -53,3 +53,22 @@ class UserAuthModel(BaseModel):
                 logger.error(str(e))
                 return False
         return True
+
+    def checkUserInfo(self, appid, username, password):
+        """
+        验证用户名密码
+        :param appid:
+        :param username:
+        :param password:
+        :return: 验证成功返回True : False
+        """
+        user = self.haveUserName(appid, username)
+        if user:
+            sql = "SELECT password FROM localauth WHERE userid_id=%s"
+            auth = self.db.get(sql, user['id'])
+            if auth['password'] == password:
+                return True
+            else:
+                return False
+        else:
+            return False
