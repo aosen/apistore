@@ -3,6 +3,7 @@
 
 #选型
 ##测试系统
+MacBook Air 10.11.1
 ubuntu 12.04
 ##线上系统
 CentOS release 6.7 (Final)
@@ -60,8 +61,8 @@ github.com/aosen/searchserver
 #技术关键点
 ##web api调用认证
 ##信息采集
-1 动态载入代理IP from memcached
-2 动态载入user-agent from settings
-3 代理ip可用性检测脚本
+1. 动态载入代理IP from memcached
+2. 动态载入user-agent from settings
+3. 代理ip可用性检测脚本
 ##小说检索算法
 参见Golang源码

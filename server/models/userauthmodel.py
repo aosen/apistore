@@ -4,6 +4,7 @@ import time
 
 from basemodel import BaseModel
 import utils
+from settings import logger
 
 class UserAuthModel(BaseModel):
     def __init__(self):
@@ -43,10 +44,12 @@ class UserAuthModel(BaseModel):
         try:
             userid_id = self.db.insert(insert_userinfo, appid, username, now, now)
         except Exception as e:
+            logger.error(str(e))
             return False
         else:
             try:
                 self.db.insert(insert_localauth, userid_id, utils.encodePassword(password))
             except Exception as e:
+                logger.error(str(e))
                 return False
         return True

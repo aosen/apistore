@@ -9,7 +9,7 @@ import random
 
 #baseurl = 'http://127.0.0.1:8000'
 baseurl = 'http://api.9miao.com'
-case = 0
+case = 3
 loop=1
 
 #比较慢的url: new,
@@ -17,9 +17,10 @@ loop=1
 switch = {
     3: [
             {
-                'url': '/noveldownload/',
+                'url': '/register/',
                 'body': {
-                    'novelid': '1',
+                    'username': 'test',
+                    'password': 'test',
                     },
             },
     ],
