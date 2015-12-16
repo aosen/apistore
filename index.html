@@ -746,12 +746,24 @@
 <pre><code>如果成功 code: 200 失败 code为相应错误码
 </code></pre>
 
+<h3>
+<a id="亲加通讯云的用户登录验证" class="anchor" href="#%E4%BA%B2%E5%8A%A0%E9%80%9A%E8%AE%AF%E4%BA%91%E7%9A%84%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>亲加通讯云的用户登录验证</h3>
+
+<pre><code>登录的用户名格式 account_appid_method_sign
+将account,appid,method进行字典排序后md5加密
+sign = md5(appsecretkey1value1key2value2...appsecret)
+</code></pre>
+
 <h2>
 <a id="开发计划" class="anchor" href="#%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92" aria-hidden="true"><span class="octicon octicon-link"></span></a>开发计划</h2>
 
-<p>2015-12-14 提供小说文件下载接口
-2015-12-14 将数据库中的小说文本转化为txt文件 done
-2015-12-9 增加redis缓存</p>
+<ul>
+<li>2015-12-14 提供小说文件下载接口  <strong><em>done</em></strong>
+</li>
+<li>2015-12-14 将数据库中的小说文本转化为txt文件 <strong><em>done</em></strong>
+</li>
+<li>2015-12-9 增加redis缓存</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/aosen/apistore">Apistore</a> is maintained by <a href="https://github.com/aosen">aosen</a>.</span>
