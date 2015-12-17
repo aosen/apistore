@@ -109,6 +109,6 @@ class CheckUser(UserAuth):
                     fail(account_sign)
                 else:
                     if self.fd.checkUserInfo(appid, account, password):
-                        self.write(json.dumps({"status": "ok", "account": account, "appkey":GOTYE_APPKEY}))
+                        self.write(json.dumps({"status": "ok", "account": account_sign, "appkey":GOTYE_APPKEY}))
                     else:
                         fail(account_sign)
