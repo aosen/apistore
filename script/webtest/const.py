@@ -9,12 +9,21 @@ import random
 
 #baseurl = 'http://127.0.0.1:8000'
 baseurl = 'http://api.9miao.com'
-case = 3
+case = 0
 loop=1
 
 #比较慢的url: new,
 
 switch = {
+    4: [
+        {
+            'url': '/search/',
+            'body': {
+                'text': '晴天娃娃会下雨',
+                'docids': '0-99999999',
+                }
+        }
+        ],
     3: [
             {
                 'url': '/register/',
