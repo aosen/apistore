@@ -3,6 +3,7 @@
 import json
 import tornado.gen
 import tornado.web
+import hashlib
 
 import utils
 from basehandler import BaseHandler
@@ -70,8 +71,8 @@ class CheckUser(UserAuth):
             self.write(json.dumps({"status": "error", "account": account, "appkey": GOTYE_APPKEY}))
         def checkSign(**kwargs):
             """验证签名"""
-            arguments = sorted(kwargs.iteritems(), key=lambda x: x[0])
-            result_string = ''.join([k + v[0] for k, v in arguments if k != 'sign'])
+            arguments = sorted(kwargs.iteritems(), key=lambda x: x)
+            result_string = ''.join([k + v for k, v in arguments if k != 'sign'])
             appsecret = self.fd.getAppSercet(kwargs['appid'])
             if not appsecret:
                 return False
@@ -86,7 +87,7 @@ class CheckUser(UserAuth):
                     'md5': md5Method,
                 }
 
-                mysign = switch.get(kwargs["sign_method"], default)(result_string, appsecret)
+                mysign = switch.get(kwargs["method"], default)(result_string, appsecret)
                 logger.info("sign:%s" % mysign)
                 if mysign != sign:
                     return False

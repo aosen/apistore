@@ -17,7 +17,7 @@ class UserAuthModel(BaseModel):
         :param username:
         :return: 如果存在返回username条目 否则返回 None
         """
-        sql = "SELECT username from userinfo WHERE appid_id=%s AND username=%s"
+        sql = "SELECT id, username from userinfo WHERE appid_id=%s AND username=%s"
         username = self.db.get(sql, int(appid), username)
         if username:
             return username
@@ -66,7 +66,8 @@ class UserAuthModel(BaseModel):
         if user:
             sql = "SELECT password FROM localauth WHERE userid_id=%s"
             auth = self.db.get(sql, user['id'])
-            if auth['password'] == password:
+            md5password = utils.encodePassword(password)
+            if auth['password'] == md5password:
                 return True
             else:
                 return False
