@@ -99,7 +99,7 @@ class CheckUser(UserAuth):
         if appkey != GOTYE_APPKEY or not account_sign or not password:
             fail(account_sign)
         else:
-            res = account_sign.split("_")
+            res = account_sign.split("-")
             if len(res) != 4:
                 fail(account_sign)
             else:
