@@ -251,7 +251,7 @@ first / second
     如果成功 code: 200 失败 code为相应错误码
     
 ###亲加通讯云的用户登录验证
-    登录的用户名格式 account_appid_method_sign
+    登录的用户名格式 account-appid-method-sign
     将account,appid,method进行字典排序后md5加密
     sign = md5(appsecretkey1value1key2value2...appsecret)
     
