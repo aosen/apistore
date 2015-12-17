@@ -41,7 +41,7 @@ urlpatterns = [
     (r"/imtoken/", GotyeToken),
 
     (r"/register/",RegisterAction),
-    (r"/checkuser/", CheckUser),
+    (r"/CheckUser/", CheckUser),
 
     (r"/test/", Index),
         ]
