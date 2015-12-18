@@ -215,6 +215,7 @@ class NovelSearch(Novel):
                             'first': v['first'],
                             'second': v['second'],
                             'novelv': v['novelpv'],
+                            'author': v['author'],
                         })
                     self.write(json_success(result))
                 else:

@@ -227,6 +227,25 @@ first / second
     novelid
 ####返回字段
     novelsrc (小说的下载地址)
+####小说文件格式
+    Json格式, 格式如下:
+    {
+        "title" : "XXXXXXXXXXX", //小说标题
+        "chaptercontent": [
+            {
+                "chapter": "第一章 XXXXXXX",
+                "content": "XXXXXXXXXXXXXX",
+            },
+            {
+                "chapter": "第二章 XXXXXXX",
+                "content": "XXXXXXXXXXXXXX",
+            },
+            {
+                "chapter": "第三章 XXXXXXX",
+                "content": "XXXXXXXXXXXXXX",
+            },            
+        ]
+    }
     
 ##用户认证接口
 ###参数列表
