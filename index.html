@@ -678,6 +678,22 @@
 <pre><code>novelsrc (小说的下载地址)
 </code></pre>
 
+<h4>
+<a id="小说文件格式" class="anchor" href="#%E5%B0%8F%E8%AF%B4%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>小说文件格式</h4>
+
+<pre><code>Json格式, 格式如下:
+{
+    "title" : "XXXXXXXXXXX", //小说标题
+    "chaptercontent": [
+        {
+            "chapterid": 123,
+            "subtitle": "XXXXXXX",
+            "content": "XXXXXXXXXXXXXX",
+        },           
+    ]
+}
+</code></pre>
+
 <h2>
 <a id="用户认证接口" class="anchor" href="#%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E6%8E%A5%E5%8F%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>用户认证接口</h2>
 
@@ -749,7 +765,7 @@
 <h3>
 <a id="亲加通讯云的用户登录验证" class="anchor" href="#%E4%BA%B2%E5%8A%A0%E9%80%9A%E8%AE%AF%E4%BA%91%E7%9A%84%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81" aria-hidden="true"><span class="octicon octicon-link"></span></a>亲加通讯云的用户登录验证</h3>
 
-<pre><code>登录的用户名格式 account_appid_method_sign
+<pre><code>登录的用户名格式 account-appid-method-sign
 将account,appid,method进行字典排序后md5加密
 sign = md5(appsecretkey1value1key2value2...appsecret)
 </code></pre>
@@ -758,6 +774,8 @@ sign = md5(appsecretkey1value1key2value2...appsecret)
 <a id="开发计划" class="anchor" href="#%E5%BC%80%E5%8F%91%E8%AE%A1%E5%88%92" aria-hidden="true"><span class="octicon octicon-link"></span></a>开发计划</h2>
 
 <ul>
+<li>2015-12-18 将数据库中的小说转化为json,并形成txt文件,开发响应脚本,脚本名称 novelfile <strong><em>done</em></strong>
+</li>
 <li>2015-12-14 提供小说文件下载接口  <strong><em>done</em></strong>
 </li>
 <li>2015-12-14 将数据库中的小说文本转化为txt文件 <strong><em>done</em></strong>
