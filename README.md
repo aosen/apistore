@@ -268,6 +268,7 @@ first / second
     sign = md5(appsecretkey1value1key2value2...appsecret)
     
 ##开发计划
+* 2015-12-18 将数据库中的小说转化为json,并形成txt文件,开发响应脚本,脚本名称 novelfile ***done***
 * 2015-12-14 提供小说文件下载接口  ***done***
 * 2015-12-14 将数据库中的小说文本转化为txt文件 ***done***
 * 2015-12-9 增加redis缓存
