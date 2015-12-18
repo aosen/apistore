@@ -4,7 +4,6 @@
     <list default="true" id="ca831919-16d4-49bc-849a-e05e5c2fe319" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/script/webtest/const.py" afterPath="$PROJECT_DIR$/script/webtest/const.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/controllers/novelhandler.py" afterPath="$PROJECT_DIR$/server/controllers/novelhandler.py" />
     </list>
     <ignored path="apistore.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="novelhandler.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="novelhandler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/controllers/novelhandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7894737">
+            <state vertical-scroll-proportion="0.0">
               <caret line="217" column="50" selection-start-line="217" selection-start-column="50" selection-end-line="217" selection-end-column="50" />
               <folding />
             </state>
@@ -45,6 +44,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.1994382">
+              <caret line="230" column="0" selection-start-line="230" selection-start-column="0" selection-end-line="240" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -56,8 +68,8 @@
         <option value="$PROJECT_DIR$/server/routers/urls.py" />
         <option value="$PROJECT_DIR$/server/models/userauthmodel.py" />
         <option value="$PROJECT_DIR$/server/controllers/userauthhandler.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/server/controllers/novelhandler.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -409,17 +421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.793104">
-          <caret line="247" column="5" selection-start-line="230" selection-start-column="4" selection-end-line="247" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/models/novelmodel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -430,10 +431,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/novelhandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7894737">
+        <state vertical-scroll-proportion="0.0">
           <caret line="217" column="50" selection-start-line="217" selection-start-column="50" selection-end-line="217" selection-end-column="50" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1994382">
+          <caret line="230" column="0" selection-start-line="230" selection-start-column="0" selection-end-line="240" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>

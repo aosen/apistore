@@ -233,17 +233,10 @@ first / second
         "title" : "XXXXXXXXXXX", //小说标题
         "chaptercontent": [
             {
-                "chapter": "第一章 XXXXXXX",
+                "chapterid": 123,
+                "subtitle": "XXXXXXX",
                 "content": "XXXXXXXXXXXXXX",
-            },
-            {
-                "chapter": "第二章 XXXXXXX",
-                "content": "XXXXXXXXXXXXXX",
-            },
-            {
-                "chapter": "第三章 XXXXXXX",
-                "content": "XXXXXXXXXXXXXX",
-            },            
+            },           
         ]
     }
     

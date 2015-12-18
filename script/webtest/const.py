@@ -7,8 +7,8 @@
 
 import random
 
-baseurl = 'http://127.0.0.1:8000'
-#baseurl = 'http://api.9miao.com'
+#baseurl = 'http://127.0.0.1:8000'
+baseurl = 'http://api.9miao.com'
 case = 0
 loop=1
 
