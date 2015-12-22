@@ -16,7 +16,7 @@ from controllers.cuthandler import Cut
 from controllers.searchhandler import SearchAction , IndexAction
 from controllers.indexhandler import Index
 from controllers.gotyehandler import GotyeToken
-from controllers.userauthhandler import RegisterAction , CheckUser
+from controllers.userauthhandler import RegisterAction , CheckUser, CheckUserExist
 
 urlpatterns = [
     (r"/", tornado.web.RedirectHandler, {"url":"https://aosen.github.io/apistore/", "permanent":False}),
@@ -42,6 +42,7 @@ urlpatterns = [
 
     (r"/register/",RegisterAction),
     (r"/CheckUser", CheckUser),
+    (r"/checkuserexist/", CheckUserExist),
 
     (r"/test/", Index),
         ]
