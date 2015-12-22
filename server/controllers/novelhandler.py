@@ -14,7 +14,7 @@ from models.novelmodel import NovelModel
 import utils
 from utils import json_success, json_failed, cache_error
 import const
-from settings import BASEURL, appsecret
+from settings import BASEURL, appsecret, NOVELSEARCH
 
 class Novel(BaseHandler):
 
@@ -176,7 +176,7 @@ class NovelSearch(Novel):
 
     def initialize(self):
         super(NovelSearch, self).initialize()
-        self.uri = BASEURL + "/search/"
+        self.uri = NOVELSEARCH + "/search/"
         self.method = "POST"
         self.headers = self.request.headers
         self.body = None
