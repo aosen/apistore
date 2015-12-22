@@ -7,8 +7,8 @@
 
 import random
 
-#baseurl = 'http://127.0.0.1:8000'
-baseurl = 'http://api.9miao.com'
+baseurl = 'http://127.0.0.1:8000'
+#baseurl = 'http://api.9miao.com'
 case = 0
 loop=1
 
@@ -60,7 +60,7 @@ switch = {
         1: [{
             'url': '/novelsearch/',
             'body': {
-                'wd':'word',
+                'wd':'小小',
                 }
             }],
         0:[
@@ -119,7 +119,7 @@ switch = {
             {
                     'url': '/novelsearch/',
                     'body': {
-                        'wd': '晴天娃娃会下雨'
+                        'wd': '小小'
                         },
                     },
             {
