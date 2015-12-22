@@ -49,7 +49,7 @@ class RegisterAction(UserAuth):
         return self.post()
 
     @utils.cache_error
-    #@utils.checkSign
+    @utils.checkSign
     @check_register_arg
     def post(self):
         #如果username 和 password 合法,则访问数据库,如果appid下的username已经存在,则返回601
@@ -112,3 +112,21 @@ class CheckUser(UserAuth):
                         self.write(json.dumps({"status": "ok", "account": account_sign, "appkey":GOTYE_APPKEY}))
                     else:
                         fail(account_sign)
+
+class CheckUserExist(UserAuth):
+    """判断用户信息是否存在"""
+
+    def get(self):
+        return self.post()
+
+    @utils.cache_error
+    @utils.checkSign
+    def post(self):
+        username = self.get_argument("username", None)
+        if username:
+            if self.fd.haveUserName(self.appid, username):
+                self.write(utils.json_failed(601))
+            else:
+                self.write(utils.json_failed(602))
+        else:
+            self.write(utils.json_failed(401))
