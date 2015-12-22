@@ -266,7 +266,17 @@ first / second
     登录的用户名格式 account-appid-method-sign
     将account,appid,method进行字典排序后md5加密
     sign = md5(appsecretkey1value1key2value2...appsecret)
-    
+
+###验证用户是否存在
+####接口地址
+    /checkuserexist/
+####接口描述
+    验证用户是否已经存在
+####参数
+    username
+####返回字段
+    存在code: 601 不存在 code: 602
+
 ##开发计划
 * 2015-12-18 将数据库中的小说转化为json,并形成txt文件,开发响应脚本,脚本名称 novelfile ***done***
 * 2015-12-14 提供小说文件下载接口  ***done***
