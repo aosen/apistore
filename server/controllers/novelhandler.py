@@ -66,7 +66,7 @@ class GetNovelList(Novel):
                        'novelpv': v['novelpv'],
                        'author': v['author'],
                        'introduction': "".join(v['introduction'].split()),
-                       'picture': "/static/novel/" + v['picture']} for v in novel_list]
+                       'picture': "/static/spider/" + v['picture']} for v in novel_list]
             self.write(json_success(result)) 
 
 
@@ -88,7 +88,7 @@ class GetNovelIntroduction(Novel):
                     'title': intro[0]['title'],
                     'novelid': intro[0]['id'],
                     'author': intro[0]['author'],
-                    'picture': "/static/novel/"+intro[0]['picture'],
+                    'picture': "/static/spider/"+intro[0]['picture'],
                     'introduction': "".join(intro[0]['introduction'].split()),
                 }
             self.write(json_success(result))
@@ -167,7 +167,7 @@ class GetNovelRank(Novel):
             'author': v['author'], 
             'first': v['first'], 
             'second': v['second'], 
-            'picture': "/static/novel/" + v['picture'],
+            'picture': "/static/spider/" + v['picture'],
             'rank': (page-1)*limit + i} for i, v in enumerate(novel_list, 1)]
         self.write(json_success(result)) 
 
@@ -209,7 +209,7 @@ class NovelSearch(Novel):
                     for v in novellist:
                         result.append({
                             'id': v['id'],
-                            'picture': "/static/novel/" + v['picture'],
+                            'picture': "/static/spider/" + v['picture'],
                             'introduction': "".join(v['introduction'].split()),
                             'title': v['title'],
                             'first': v['first'],
