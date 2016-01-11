@@ -170,7 +170,7 @@ first / second
 ####参数说明
     novelid
 ####返回字段 
-    title, novelid, author, picture, introduction
+    title, novelid, author, picture, introduction, chapternum
 
 ###获取小说的章节列表接口
 ####接口地址 
