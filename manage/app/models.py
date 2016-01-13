@@ -50,6 +50,7 @@ class Novel(models.Model):
     picture = models.CharField(verbose_name="图片", max_length=300) #图片
     novelsource = models.CharField(verbose_name="原文地址", max_length=300) #原文地址
     novelpv = models.IntegerField(verbose_name="小说阅读量", default=0)
+    novelcollect = models.IntegerField(verbose_name="小说收藏量", default=0)  #小说收藏量
     createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
 
     class Meta:
