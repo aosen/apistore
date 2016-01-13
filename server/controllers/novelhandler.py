@@ -81,7 +81,7 @@ class GetNovelIntroduction(Novel):
             raise ValueError(1)
         else:
             intro = self.novel.loadNovelIntroduction(int(novelid))
-            #chapter_list = self.novel.loadNovelChapter(int(novelid))
+            chapter_list = self.novel.loadNovelChapter(int(novelid))
             if intro.__len__() != 1:
                 raise ValueError(500)
             else:
@@ -90,7 +90,7 @@ class GetNovelIntroduction(Novel):
                     'novelid': intro[0]['id'],
                     'author': intro[0]['author'],
                     'picture': "/static/spider/"+intro[0]['picture'],
-                    #'chapternum': len(chapter_list),
+                    'chapternum': len(chapter_list),
                     'introduction': "".join(intro[0]['introduction'].split()),
                 }
             self.write(json_success(result))
