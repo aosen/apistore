@@ -50,7 +50,6 @@ class Novel(models.Model):
     picture = models.CharField(verbose_name="图片", max_length=300) #图片
     novelsource = models.CharField(verbose_name="原文地址", max_length=300) #原文地址
     novelpv = models.IntegerField(verbose_name="小说阅读量", default=0)
-    novelcollect = models.IntegerField(verbose_name="小说收藏量", default=0)  #小说收藏量
     createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
 
     class Meta:
@@ -60,9 +59,6 @@ class Novel(models.Model):
 
     def __unicode__(self):
         return self.title
-
-class Clickrank(models.Model):
-    """小说点击排名"""
 
 class Novelrank(models.Model):
     """小说排名数据表"""
@@ -105,7 +101,7 @@ class Content(models.Model):
 
 
 class Tag(models.Model):
-    """分类列表"""
+    """分类列表，一级分类为男生女生，二级分类为根据小说内容分类"""
     CHOICES = [
                 [0, '女'],
                 [1, '男']
@@ -118,6 +114,56 @@ class Tag(models.Model):
         verbose_name = u'小说分类'
         verbose_name_plural = u'小说分类'
         db_table = 'tag'
+
+    def __unicode__(self):
+        return self.title
+
+
+class Girlpic(models.Model):
+    """美女图片"""
+    title = models.CharField(verbose_name="标题", max_length=100)
+    cl = models.CharField(verbose_name='分类', max_length=20)
+    picmsg = models.TextField(verbose_name='图文列表')
+    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name = u'美女图片'
+        verbose_name_plural = u'美女图片'
+        db_table = 'girlpic'
+
+    def __unicode__(self):
+        return self.title
+
+
+class News(models.Model):
+    """新闻"""
+    title = models.CharField(verbose_name="标题", max_length=200)
+    intro = models.CharField(verbose_name="描述", max_length=800)
+    tag = models.CharField(verbose_name='分类', max_length=50)
+    image = models.CharField(verbose_name='图片', max_length=200)
+    url = models.CharField(verbose_name='内容源', unique=True, max_length=200)
+    createtime = models.CharField(verbose_name='创建时间', default=str(int(time.time())), max_length=10)
+
+    class Meta:
+        verbose_name = u'新闻'
+        verbose_name_plural = u'新闻'
+        db_table = 'news'
+
+    def __unicode__(self):
+        return self.title
+
+class Video(models.Model):
+    """视频"""
+    title = models.CharField(verbose_name="标题", max_length=200)
+    intro = models.CharField(verbose_name="描述", max_length=800)
+    tag = models.CharField(verbose_name='分类', max_length=50)
+    image = models.CharField(verbose_name='图片', max_length=200)
+    video = models.CharField(verbose_name='视频', unique=True, max_length=200)
+
+    class Meta:
+        verbose_name = u'视频'
+        verbose_name_plural = u'视频'
+        db_table = 'video'
 
     def __unicode__(self):
         return self.title
@@ -136,3 +182,16 @@ class UserInfo(models.Model):
 
     def __unicode__(self):
         return self.username
+
+class LocalAuth(models.Model):
+    """本地用户验证,相对与微信微博验证"""
+    userid = models.ForeignKey(UserInfo, verbose_name="UserID")
+    password = models.CharField(verbose_name="密码", max_length=50)
+
+    class Meta:
+        verbose_name = u'本地验证'
+        verbose_name_plural = u'本地验证'
+        db_table = 'localauth'
+
+    def __unicode__(self):
+        return userid
