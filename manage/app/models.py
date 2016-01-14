@@ -36,7 +36,7 @@ CREATE TABLE `first` (
 CREATE TABLE `second` (
 `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
 `secondname` varchar(20) NOT NULL,
-`updatetime` datetime(6) NOT NULL,
+`updatetime` date NOT NULL,
 `createtime` date NOT NULL
 )
 ;
@@ -77,7 +77,7 @@ CREATE TABLE `clickrank` (
 CREATE TABLE `recommendlist` (
 `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
 `recommendlist` longtext NOT NULL,
-`updatetime` datetime(6) NOT NULL,
+`updatetime` date NOT NULL,
 `createtime` date NOT NULL
 )
 ;
@@ -122,13 +122,13 @@ class Userlog(models.Model):
     logintime = models.DateField(verbose_name="登陆日期")
 
 class First(models.Model):
-    """用户一级分类"""
+    """小说一级分类"""
     firstname = models.CharField(verbose_name="一级分类", max_length=20) #一级分类名称
     updatetime = models.DateField(verbose_name='更新时间') #修改时间
     createtime = models.DateField(verbose_name='创建时间') #创建时间
 
 class Second(models.Model):
-    """用户二级分类"""
+    """小说二级分类"""
     secondname = models.CharField(verbose_name="二级分类", max_length=20) #二级分类名称
     updatetime = models.DateTimeField(verbose_name='更新时间') #修改时间
     createtime = models.DateField(verbose_name='创建时间') #创建时间 
