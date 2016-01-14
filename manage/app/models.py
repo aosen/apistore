@@ -10,129 +10,188 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8') 
 
+"""
+创建数据库表
 
-class Application(models.Model):
-    """使用web api的app信息"""
+BEGIN;
+CREATE TABLE `userinfo` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`userauth` varchar(30) NOT NULL UNIQUE,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `userlog` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`userid` integer NOT NULL,
+`logintime` date NOT NULL
+)
+;
+CREATE TABLE `first` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`firstname` varchar(20) NOT NULL,
+`updatetime` date NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `second` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`secondname` varchar(20) NOT NULL,
+`updatetime` datetime(6) NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `novel` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`title` varchar(200) NOT NULL,
+`firstid` integer NOT NULL,
+`secondid` integer NOT NULL,
+`author` varchar(50) NOT NULL,
+`introduction` longtext NOT NULL,
+`picture` varchar(300) NOT NULL,
+`novelsource` varchar(300) NOT NULL,
+`novelpv` integer NOT NULL,
+`novelcollect` integer NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `collectrank` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`novelid` integer NOT NULL,
+`firstid` integer NOT NULL,
+`secondid` integer NOT NULL,
+`novelpv` integer NOT NULL,
+`novelcollect` integer NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `clickrank` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`novelid` integer NOT NULL,
+`firstid` integer NOT NULL,
+`secondid` integer NOT NULL,
+`novelpv` integer NOT NULL,
+`novelcollect` integer NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `recommendlist` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`recommendlist` longtext NOT NULL,
+`updatetime` datetime(6) NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE TABLE `content` (
+`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+`novelid` integer NOT NULL,
+`title` varchar(200) NOT NULL,
+`firstid` integer NOT NULL,
+`secondid` integer NOT NULL,
+`chapter` integer NOT NULL,
+`subtitle` varchar(200) NOT NULL,
+`text` longtext NOT NULL,
+`contentsource` varchar(300) NOT NULL,
+`createtime` date NOT NULL
+)
+;
+CREATE INDEX `novel_c399d7e8` ON `novel` (`firstid`);
+CREATE INDEX `novel_5b0d0f3e` ON `novel` (`secondid`);
+CREATE INDEX `novel_e969df21` ON `novel` (`author`);
+CREATE INDEX `collectrank_c399d7e8` ON `collectrank` (`firstid`);
+CREATE INDEX `collectrank_5b0d0f3e` ON `collectrank` (`secondid`);
+CREATE INDEX `clickrank_c399d7e8` ON `clickrank` (`firstid`);
+CREATE INDEX `clickrank_5b0d0f3e` ON `clickrank` (`secondid`);
+CREATE INDEX `content_9b8d26f7` ON `content` (`novelid`);
+CREATE INDEX `content_9246ed76` ON `content` (`title`);
+CREATE INDEX `content_c399d7e8` ON `content` (`firstid`);
+CREATE INDEX `content_5b0d0f3e` ON `content` (`secondid`);
+CREATE INDEX `content_650f3c59` ON `content` (`chapter`);
+CREATE INDEX `content_48ed521f` ON `content` (`subtitle`);
 
-    _secret = hashlib.md5(str(time.time()) + str(random.randint(1, int(time.time())))).hexdigest()
+COMMIT;
+"""
 
-    appsecret = models.CharField(max_length=32, unique=True, default=_secret)
-    createtime = models.DateTimeField(auto_now_add=True)
-    updatetime = models.DateTimeField(auto_now=True)
+class UserInfo(models.Model):
+    """用户信息表"""
+    userauth = models.CharField(verbose_name="用户认证码", unique=True, max_length=30)
+    createtime = models.DateField(verbose_name='创建时间')
 
-    class Meta:
-        verbose_name = u'开发者'
-        verbose_name_plural = u'开发者'
-        db_table = 'application'
+class Userlog(models.Model):
+    """用户log, 只记录用户当天首次登陆"""
+    userid = models.IntegerField(verbose_name="用户ID")
+    logintime = models.DateField(verbose_name="登陆日期")
 
-    def __unicode__(self):
-        return self.appsecret
+class First(models.Model):
+    """用户一级分类"""
+    firstname = models.CharField(verbose_name="一级分类", max_length=20) #一级分类名称
+    updatetime = models.DateField(verbose_name='更新时间') #修改时间
+    createtime = models.DateField(verbose_name='创建时间') #创建时间
 
-class Doc(models.Model):
-    """appid与docid列表"""
-    appid = models.OneToOneField(Application, verbose_name="AppID", unique=True)
-    maxdocid = models.BigIntegerField(verbose_name="文档列表")
-    createtime = models.CharField(verbose_name='创建时间', default=str(int(time.time())), max_length=10)
-    updatetime = models.CharField(verbose_name='更新时间', default=str(int(time.time())), max_length=10)
-
-    class Meta:
-        verbose_name = u'文档列表'
-        verbose_name_plural = u'文档列表'
-        db_table = 'doc'
+class Second(models.Model):
+    """用户二级分类"""
+    secondname = models.CharField(verbose_name="二级分类", max_length=20) #二级分类名称
+    updatetime = models.DateTimeField(verbose_name='更新时间') #修改时间
+    createtime = models.DateField(verbose_name='创建时间') #创建时间 
 
 class Novel(models.Model):
     """小说简介数据表"""
-    title = models.CharField(verbose_name="标题", max_length=200, unique=True) #小说
-    first = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类
-    second = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类
+    title = models.CharField(verbose_name="标题", max_length=200) #小说
+    firstid = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类
+    secondid = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类
     author = models.CharField(verbose_name="作者", max_length=50, db_index=True) #作者
     introduction = models.TextField(verbose_name="作品简介") #作品简介
     picture = models.CharField(verbose_name="图片", max_length=300) #图片
     novelsource = models.CharField(verbose_name="原文地址", max_length=300) #原文地址
-    novelpv = models.IntegerField(verbose_name="小说阅读量", default=0)
+    novelpv = models.IntegerField(verbose_name="小说阅读量", default=0) #小说阅读数
     novelcollect = models.IntegerField(verbose_name="小说收藏量", default=0)  #小说收藏量
-    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
+    createtime = models.DateField(verbose_name='创建时间') #小说的首次抓去或上传时间
 
-    class Meta:
-        verbose_name = u'小说标题'
-        verbose_name_plural = u'小说标题'
-        db_table = 'novel'
-
-    def __unicode__(self):
-        return self.title
+class Collectrank(models.Model):
+    """小说收藏量排名"""
+    novelid = models.IntegerField(verbose_name="小说ID")
+    firstid = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类id
+    secondid = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类id
+    novelpv = models.IntegerField(verbose_name="小说阅读量")
+    novelcollect = models.IntegerField(verbose_name="小说收藏量")  #小说收藏量
+    createtime = models.DateField(verbose_name='创建时间')
 
 class Clickrank(models.Model):
     """小说点击排名"""
-
-class Novelrank(models.Model):
-    """小说排名数据表"""
     novelid = models.IntegerField(verbose_name="小说ID")
-    title = models.CharField(verbose_name="标题", max_length=200) #小说
-    first = models.IntegerField(verbose_name="一级分类") #一级分类
-    second = models.IntegerField(verbose_name="二级分类") #二级分类
-    picture = models.CharField(verbose_name="图片", max_length=300) #图片
-    author = models.CharField(verbose_name="作者", max_length=50) #作者
+    firstid = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类id
+    secondid = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类id
     novelpv = models.IntegerField(verbose_name="小说阅读量")
-    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
+    novelcollect = models.IntegerField(verbose_name="小说收藏量")  #小说收藏量
+    createtime = models.DateField(verbose_name='创建时间')
 
-    class Meta:
-        verbose_name = u'小说排名'
-        verbose_name_plural = u'小说排名'
-        db_table = 'novelrank'
-
-    def __unicode__(self):
-        return self.title
+class Recommendlist(models.Model):
+    """小说推荐列表 json格式的"""
+    """
+    {
+        "classname": "类型名称", 
+        "firstnovel": "第一本小说id",
+        "secondtosix": [
+            {
+                "novelid": "第二本小说id",
+                "desc": "第二本小说描述",
+            },
+            ...
+        ],
+        "other": [novelid...],
+    }
+    """
+    recommendlist = models.TextField(verbose_name="推荐列表") #推荐列表
+    updatetime = models.DateTimeField(verbose_name='更新时间') #修改时间
+    createtime = models.DateField(verbose_name='创建时间') #创建时间
 
 class Content(models.Model):
     """小说内容，由爬虫抓取获得"""
     novelid = models.IntegerField(verbose_name="小说ID", db_index=True)
     title = models.CharField(verbose_name="标题", max_length=200, db_index=True) #小说
-    first = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类
-    second = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类
+    firstid = models.IntegerField(verbose_name="一级分类", db_index=True) #一级分类id
+    secondid = models.IntegerField(verbose_name="二级分类", db_index=True) #二级分类id
     chapter = models.IntegerField(verbose_name="序列", db_index=True) #章节
     subtitle = models.CharField(verbose_name="副标题", max_length=200, db_index=True) #副标题
     text = models.TextField(verbose_name="正文") #小说正文
     contentsource = models.CharField(verbose_name="原文地址", max_length=300) #原文地址
-    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
-
-    class Meta:
-        verbose_name = u'小说内容'
-        verbose_name_plural = u'小说内容'
-        db_table = 'content'
-
-    def __unicode__(self):
-        return self.title
-
-
-class Tag(models.Model):
-    """分类列表"""
-    CHOICES = [
-                [0, '女'],
-                [1, '男']
-            ]
-    first = models.IntegerField(verbose_name="一级分类", choices=CHOICES ,db_index=True) #0 女生 1 男生
-    second = models.CharField(verbose_name="二级分类", max_length=200, unique=True) # 二级分类为详细的分类信息
-    createtime = models.DateField(verbose_name='创建时间', auto_now_add=True)
-
-    class Meta:
-        verbose_name = u'小说分类'
-        verbose_name_plural = u'小说分类'
-        db_table = 'tag'
-
-    def __unicode__(self):
-        return self.title
-
-class UserInfo(models.Model):
-    """开发者的用户信息表"""
-    appid = models.ForeignKey(Application, verbose_name="AppID")
-    username = models.CharField(verbose_name="用户名", max_length=20)
-    createtime = models.CharField(verbose_name='创建时间', default=str(int(time.time())), max_length=10)
-    updatetime = models.CharField(verbose_name='更新时间', default=str(int(time.time())), max_length=10)
-
-    class Meta:
-        verbose_name = u'用户信息'
-        verbose_name_plural = u'用户信息'
-        db_table = 'userinfo'
-
-    def __unicode__(self):
-        return self.username
+    createtime = models.DateField(verbose_name='创建时间')
