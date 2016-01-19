@@ -7,11 +7,11 @@
 
 import random
 
-#baseurl = 'http://127.0.0.1:8000'
+baseurl = 'http://127.0.0.1:8000'
 #baseurl = 'http://api.9miao.com'
-baseurl = 'http://10.0.16.188:8000'
+#baseurl = 'http://10.0.16.188:8000'
 case = 0
-loop=500
+loop=50
 
 #比较慢的url: new,
 

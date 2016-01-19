@@ -13,9 +13,6 @@
 2. 我们需要的是32位的字符串，字母全部小写（如果是md5出来的是大写字母，请转为小写），图片文件不用加入签名中测试。
 3. 以下所有api均需要以下参数： appid， sign_method, sign
 
-###api域名
-    http://api.9miao.com
-
 ##状态码
 <table>
 <tbody>
