@@ -196,7 +196,13 @@ class Content(models.Model):
     contentsource = models.CharField(verbose_name="原文地址", max_length=200, db_index=True) #原文地址
     createtime = models.DateField(verbose_name='创建时间')
 
-class index(models.Model):
+class Index(models.Model):
     """小说索引信息"""
     key = models.BinaryField(verbose_name="Key")
     value = models.BinaryField(verbose_name="Value")
+
+class Requestlist(models.Model):
+    """请求列表"""
+    name = models.CharField(verbose_name="爬虫", max_length=20)
+    requ = models.TextField(verbose_name="请求")
+    createtime = models.DateField(verbose_name="创建时间")
