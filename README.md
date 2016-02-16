@@ -3,7 +3,7 @@
 2. 基于POST方法
 
 ##架构图
-![架构图](http://i12.tietuku.com/75564ed73a2014e8.jpg "架构图")
+![架构图](http://i12.tietuku.com/d525b2ba297a7f0b.jpg "架构图")
 
 ##web api 签名验证
 ###签名方法
