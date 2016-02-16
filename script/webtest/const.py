@@ -10,12 +10,17 @@ import random
 #baseurl = 'http://127.0.0.1:8000'
 baseurl = 'http://api.9miao.com'
 #baseurl = 'http://10.0.16.188:8000'
-case = 0
+case = 7
 loop=100
 
 #比较慢的url: new,
 
 switch = {
+        7: [
+            {
+                'url': '/taglist/',
+                },
+            ],
         6: [
             {
                     "url": "/checkuserexist/",

@@ -10,107 +10,6 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8') 
 
-"""
-创建数据库表
-
-BEGIN;
-CREATE TABLE `userinfo` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`userauth` varchar(30) NOT NULL UNIQUE,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `userlog` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`userid` integer NOT NULL,
-`logintime` date NOT NULL
-)
-;
-CREATE TABLE `first` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`firstname` varchar(20) NOT NULL,
-`updatetime` date NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `second` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`secondname` varchar(20) NOT NULL,
-`updatetime` date NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `novel` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`title` varchar(200) NOT NULL,
-`firstid` integer NOT NULL,
-`secondid` integer NOT NULL,
-`author` varchar(50) NOT NULL,
-`introduction` longtext NOT NULL,
-`picture` varchar(300) NOT NULL,
-`novelsource` varchar(300) NOT NULL,
-`novelpv` integer NOT NULL,
-`novelcollect` integer NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `collectrank` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`novelid` integer NOT NULL,
-`firstid` integer NOT NULL,
-`secondid` integer NOT NULL,
-`novelpv` integer NOT NULL,
-`novelcollect` integer NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `clickrank` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`novelid` integer NOT NULL,
-`firstid` integer NOT NULL,
-`secondid` integer NOT NULL,
-`novelpv` integer NOT NULL,
-`novelcollect` integer NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `recommendlist` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`recommendlist` longtext NOT NULL,
-`updatetime` date NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE TABLE `content` (
-`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-`novelid` integer NOT NULL,
-`title` varchar(200) NOT NULL,
-`firstid` integer NOT NULL,
-`secondid` integer NOT NULL,
-`chapter` integer NOT NULL,
-`subtitle` varchar(200) NOT NULL,
-`text` longtext NOT NULL,
-`contentsource` varchar(300) NOT NULL,
-`createtime` date NOT NULL
-)
-;
-CREATE INDEX `novel_c399d7e8` ON `novel` (`firstid`);
-CREATE INDEX `novel_5b0d0f3e` ON `novel` (`secondid`);
-CREATE INDEX `novel_e969df21` ON `novel` (`author`);
-CREATE INDEX `collectrank_c399d7e8` ON `collectrank` (`firstid`);
-CREATE INDEX `collectrank_5b0d0f3e` ON `collectrank` (`secondid`);
-CREATE INDEX `clickrank_c399d7e8` ON `clickrank` (`firstid`);
-CREATE INDEX `clickrank_5b0d0f3e` ON `clickrank` (`secondid`);
-CREATE INDEX `content_9b8d26f7` ON `content` (`novelid`);
-CREATE INDEX `content_9246ed76` ON `content` (`title`);
-CREATE INDEX `content_c399d7e8` ON `content` (`firstid`);
-CREATE INDEX `content_5b0d0f3e` ON `content` (`secondid`);
-CREATE INDEX `content_650f3c59` ON `content` (`chapter`);
-CREATE INDEX `content_48ed521f` ON `content` (`subtitle`);
-
-COMMIT;
-"""
-
 class UserInfo(models.Model):
     """用户信息表"""
     userauth = models.CharField(verbose_name="用户认证码", unique=True, max_length=30)
@@ -130,7 +29,7 @@ class First(models.Model):
 class Second(models.Model):
     """小说二级分类"""
     secondname = models.CharField(verbose_name="二级分类", max_length=20, unique=True) #二级分类名称
-    updatetime = models.DateTimeField(verbose_name='更新时间') #修改时间
+    updatetime = models.DateField(verbose_name='更新时间') #修改时间
     createtime = models.DateField(verbose_name='创建时间') #创建时间 
 
 class Novel(models.Model):
@@ -196,7 +95,7 @@ class Content(models.Model):
     contentsource = models.CharField(verbose_name="原文地址", max_length=200, db_index=True) #原文地址
     createtime = models.DateField(verbose_name='创建时间')
 
-class Index(models.Model):
+class Indexlist(models.Model):
     """小说索引信息"""
     key = models.BinaryField(verbose_name="Key")
     value = models.BinaryField(verbose_name="Value")
@@ -206,3 +105,8 @@ class Requestlist(models.Model):
     name = models.CharField(verbose_name="爬虫", max_length=20)
     requ = models.TextField(verbose_name="请求")
     createtime = models.DateField(verbose_name="创建时间")
+
+class System(models.Model):
+    """系统配置"""
+    k = models.CharField(verbose_name="key", max_length=20)
+    v = models.CharField(verbose_name="value", max_length=20)
