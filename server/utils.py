@@ -4,6 +4,7 @@ import json
 import datetime
 import hashlib
 import traceback
+import functools
 
 import tornado.gen
 
@@ -73,8 +74,8 @@ class JsonEncoder(json.JSONEncoder):
 def checkSign(func):
     """验证开发者发过来的sign，进行web api访问权限判断"""
 
-    def wrapper(*args, **kwargs):
-        self = args[0]
+    @functools.wraps(func) 
+    def wrapper(self, *args, **kwargs):
         sign = self.get_argument('sign', None)
         if not sign:
             raise ValueError(404)
